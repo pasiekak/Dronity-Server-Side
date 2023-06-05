@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     hash: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'User'
+    modelName: 'User',
+    timestamps: false,
+    freezeTableName: true,
   });
   return User;
 };
