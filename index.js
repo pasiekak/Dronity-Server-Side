@@ -1,4 +1,7 @@
-const db = require('./models')
-
 const ExpressLoader = require('./loaders/Express');
-new ExpressLoader()
+const db = require('./database/models');
+
+db.sequelize.sync().then(() => {
+    console.log('Database synchronised');
+    new ExpressLoader();
+})
