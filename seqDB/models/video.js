@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Image extends Model {
+  class Video extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,19 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Image.belongsTo(models.Operator)
+      Video.belongsTo(models.Operator)
     }
   }
-  Image.init({
-    image_path: DataTypes.STRING,
-    image_name: DataTypes.STRING,
-    image_extension: DataTypes.STRING,
-    image_url: DataTypes.STRING
+  Video.init({
+    video_path: DataTypes.STRING,
+    video_name: DataTypes.STRING,
+    video_extension: DataTypes.STRING,
+    video_url: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Image',
+    modelName: 'Video',
     freezeTableName: true,
     timestamps: false,
   });
-  return Image;
+  return Video;
 };

@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Commission.belongsTo(models.Account, { as: 'author', allowNull: false })
-      Commission.belongsTo(models.Account, { as: 'contractor' })
+      Commission.belongsTo(models.Account, { foreignKey: 'author' })
+      Commission.belongsTo(models.Account, { foreignKey: 'contractor' })
     }
   }
   Commission.init({
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     city: DataTypes.STRING,
     start_date: DataTypes.DATE,
-    end_data: DataTypes.DATE,
+    end_date: DataTypes.DATE,
     completed: DataTypes.BOOLEAN,
     payment: DataTypes.INTEGER
   }, {

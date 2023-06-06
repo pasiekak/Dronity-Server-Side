@@ -1,13 +1,9 @@
 const ExpressLoader = require('./loaders/Express');
 const db = require('./seqDB/models');
-db.sequelize.sync().then(() => {
-    // db.Account.create({
-    //     login: "Krzys",
-    //     hash: "HashPassword",
-    //     email: "test@email.com",
-    //     RoleId: 1,
-    //     ProfileId: 1,
-    // })
+const test = require('./test');
+db.sequelize.sync({force: false}).then(() => {
+    //test();
+    // TODO: TESTY JEDNOSTKOWE BAZY DANYCH
     console.log('Database synchronised');
     new ExpressLoader();
 })

@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "video_path": "videos/operators",
+        "video_name": "V00001",
+        "video_extension": ".mp4",
+        "video_url": null,
+        "OperatorId": 4
+    },
+    {
+        "id": 2,
+        "video_path": "videos/operators",
+        "video_name": "V00002",
+        "video_extension": ".mp4",
+        "video_url": null,
+        "OperatorId": 3
+    },
+    {
+        "id": 3,
+        "video_path": "videos/operators",
+        "video_name": "V00003",
+        "video_extension": ".mp4",
+        "video_url": null,
+        "OperatorId": 1
+    }
+]

@@ -1,0 +1,209 @@
+[
+    {
+      "id": 1,
+      "login": "admin",
+      "hash": "$2a$12$MqXTVPvtzE.CZajQUxaXXOpjA8rY8Q3MtxEINpwhlOApvzEConuUS",
+      "email": "reneecampos@terrago.com",
+      "RoleId": 1,
+      "OperatorId": null,
+      "ClientId": null
+    },
+    {
+      "id": 2,
+      "login": "moderator",
+      "hash": "$2a$12$mkFJuKWTd2S8XWBW2YduE.H49h8lNqZZzq466gv2nXLgbPf9vg.3K",
+      "email": "natashacollins@terrago.com",
+      "RoleId": 2,
+      "OperatorId": null,
+      "ClientId": null
+    },
+    {
+      "id": 3,
+      "login": "operator",
+      "hash": "$2a$12$Dp.tVdtO9aiYtmybnS.Fie01E1t74Rpf31IMmnIx2oOXtaiGKUkcW",
+      "email": "marciroman@terrago.com",
+      "RoleId": 3,
+      "OperatorId": 1,
+      "ClientId": null
+    },
+    {
+      "id": 4,
+      "login": "client",
+      "hash": "$2a$12$bzt0JnmTNR2rmG6eIGoQA.XcnNuMt2EO6KZPsMoX1W7n1sqkv6A7W",
+      "email": "trevinohawkins@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 1
+    },
+    {
+      "id": 5,
+      "login": "HobbsMoreno24",
+      "hash": "$2a$12$nPsbtJsCTZnKAv9YB95MO.B9Vu9ukoZ6Im7esQS7Eb5jm3XCAvbfu",
+      "email": "hobbsmoreno@terrago.com",
+      "RoleId": 3,
+      "OperatorId": 5,
+      "ClientId": null
+    },
+    {
+      "id": 6,
+      "login": "PatrickWright66",
+      "hash": "$2a$12$/6YRQfbJsaxUr1H2cmZGEegUo47V9oRuHLlHI2215xy85GOYfOOSC",
+      "email": "patrickwright@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 2
+    },
+    {
+      "id": 7,
+      "login": "HartmanVega90",
+      "hash": "$2a$12$UdADMjkvd.C7Eo22ZjqywuUDFS1o9Mi645JG.yCpFq/aPEyawGaTK",
+      "email": "hartmanvega@terrago.com",
+      "RoleId": 3,
+      "OperatorId": 4,
+      "ClientId": null
+    },
+    {
+      "id": 8,
+      "login": "NicholsonFischer14",
+      "hash": "$2a$12$HGj09PIPtgu6tYtBErkXwesKrtdYvxVFR7f8QenAXzijLiPqBaJAe",
+      "email": "nicholsonfischer@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 3
+    },
+    {
+      "id": 9,
+      "login": "MoorePerry71",
+      "hash": "$2a$12$rIlPMwV34gmZ/CKxbz1mgejJJnSLudv0GXP.gOe/y58DQP/srJu2C",
+      "email": "mooreperry@terrago.com",
+      "RoleId": 3,
+      "OperatorId": 3,
+      "ClientId": null
+    },
+    {
+      "id": 10,
+      "login": "MonicaHeath95",
+      "hash": "$2a$12$y5V6yla1jFEnNnxQnq8JRe5e5BhsynCdf08nqBdDa3kk597LRdPKK",
+      "email": "monicaheath@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 4
+    },
+    {
+      "id": 11,
+      "login": "JohnnieDonaldson55",
+      "hash": "$2a$12$PoT84blNSR.7F56S8BUQ0eTx7oVgzeHr..KxEDiMW.qwRv2dgOncq",
+      "email": "johnniedonaldson@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 5
+    },
+    {
+      "id": 12,
+      "login": "AdaClark3",
+      "hash": "$2a$12$uSQlQ583xRAudkGZt5yTpOq/MuKs2rfUgGgBh2BTUBmtK0Bg0eTzS",
+      "email": "adaclark@terrago.com",
+      "RoleId": 3,
+      "OperatorId": 2,
+      "ClientId": null
+    },
+    {
+      "id": 13,
+      "login": "ChristianSchmidt18",
+      "hash": "$2a$12$HfTLcDorRg1vI8SKXnqqTeQ5kxpeYAWMRpj5qzqZ1kaSI1KhcKLpu",
+      "email": "christianschmidt@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 6
+    },
+    {
+      "id": 14,
+      "login": "TownsendPace84",
+      "hash": "$2a$12$CI95O0d6VTk8.dYDUMLq6OKR3lny20gR6fgUzbP68Nho2wEqaPc8S",
+      "email": "townsendpace@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 7
+    },
+    {
+      "id": 15,
+      "login": "KimKnowles55",
+      "hash": "$2a$12$AESK4w5UofoHefYkgrw2muV3PlCechakSAehGNTH8Uw9aIn3xLrNS",
+      "email": "kimknowles@terrago.com",
+      "RoleId": 3,
+      "OperatorId": 1,
+      "ClientId": null
+    },
+    {
+      "id": 16,
+      "login": "SilvaSullivan90",
+      "hash": "$2a$12$gpACSjK44rUzZpW1ZHIn6O5YsTeo5XVh5mYbSPH34KBZYVk1mxTw2",
+      "email": "silvasullivan@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 8
+    },
+    {
+      "id": 17,
+      "login": "HumphreyBallard46",
+      "hash": "$2a$12$mFSb7upoPovZnBOezTTpLegMXPblDCLl3.JocgNUftZ6FJqHdS79C",
+      "email": "humphreyballard@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 9
+    },
+    {
+      "id": 18,
+      "login": "LorettaVargas34",
+      "hash": "$2a$12$eYRMaWjBTEkfFASxZfSpgumCsqpYEVH71RyjB69Ol0xsxho8.YPMK",
+      "email": "lorettavargas@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 10
+    },
+    {
+      "id": 19,
+      "login": "AugustaMccullough22",
+      "hash": "$2a$12$M6NB7ct8C55gmw9vrgHl4ekDHYwsitfhf53o.3BUFMdlGvoqMuhYe",
+      "email": "augustamccullough@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 11
+    },
+    {
+      "id": 20,
+      "login": "LavonneMeadows41",
+      "hash": "$2a$12$soUaOPogan.k9H2vVAbmoeRQYZefOD5e6FSIu4wzQ6NShMsxdt.0G",
+      "email": "lavonnemeadows@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 12
+    },
+    {
+      "id": 21,
+      "login": "MillerFulton55",
+      "hash": "$2a$12$WtRpKGQ1fDze/jlshaO1r.OsedArN6ZhPE.XtP8/rChyJC4Zdjicu",
+      "email": "millerfulton@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 14
+    },
+    {
+      "id": 22,
+      "login": "AraceliWood27",
+      "hash": "$2a$12$pDTXeU4R9GHKFGMbOaitFO6HZz./Y8wwmeKis/CuHQmRvGtlqq.se",
+      "email": "araceliwood@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 15
+    },
+    {
+      "id": 23,
+      "login": "MasonHale25",
+      "hash": "$2a$12$cCJK.u5ijoQggGeo60qVneSs2MdhQxH04inAMwZV21wyTbHqCHn3q",
+      "email": "masonhale@terrago.com",
+      "RoleId": 4,
+      "OperatorId": null,
+      "ClientId": 15
+    }
+]

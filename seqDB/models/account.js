@@ -10,9 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Account.belongsTo(models.Role, { as: 'role' });
-      Account.belongsTo(models.Operator, { as: 'profile' });
-      Account.belongsTo(models.Client, { as: 'profile' });
+      Account.belongsTo(models.Role);
+      Account.belongsTo(models.Operator, { unique: true });
+      Account.belongsTo(models.Client, { unique: true });
+
+      Account.hasMany(models.Commission, { foreignKey: 'author' })
+      Account.hasMany(models.Commission, { foreignKey: 'contractor' })
     };
   }
   Account.init({
@@ -26,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
-  // TODO: Nadpisać metodę tworzenia konta tak żeby przed utworzeniem stworzyć dla niego role i profil (operator/client)
+  Account.validate
 
   return Account;
 };

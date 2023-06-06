@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Operator.belongsTo(models.Image, {as : 'avatar'})
+
+      Operator.hasOne(models.Account, { unique: true });
+      Operator.hasMany(models.Video);
+      Operator.hasMany(models.Image);
     }
   }
   Operator.init({
@@ -20,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.STRING,
     license: DataTypes.STRING,
     city: DataTypes.STRING,
-    operational_range: DataTypes.STRING,
+    operational_range: DataTypes.INTEGER,
     description: DataTypes.STRING
   }, {
     sequelize,
