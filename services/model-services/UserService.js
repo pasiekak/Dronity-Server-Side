@@ -1,4 +1,4 @@
-const User = require('../../database/models').User;
+const User = require('../../seqDB/models').User;
 const BaseService = require('../BaseService');
 
 class UserService extends BaseService {
