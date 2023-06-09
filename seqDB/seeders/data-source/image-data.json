@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "image_path": "images/operators",
+        "image_path": "media/images/operators",
         "image_name": "I00001",
         "image_extension": ".img",
         "image_url": null,
@@ -9,7 +9,7 @@
     },
     {
         "id": 2,
-        "image_path": "images/operators",
+        "image_path": "media/images/operators",
         "image_name": "I00002",
         "image_extension": ".img",
         "image_url": null,
@@ -17,7 +17,7 @@
     },
     {
         "id": 3,
-        "image_path": "images/operators",
+        "image_path": "media/images/operators",
         "image_name": "I00003",
         "image_extension": ".img",
         "image_url": null,

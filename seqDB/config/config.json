@@ -5,7 +5,8 @@
   },
   "test": {
     "dialect": "sqlite",
-    "storage": ":memory"
+    "storage": "./seqDB/database/test-database.sqlite3",
+    "logging": false
   },
   "production": {
     "dialect": "sqlite",

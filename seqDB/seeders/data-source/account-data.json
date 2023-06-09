@@ -131,7 +131,7 @@
       "hash": "$2a$12$AESK4w5UofoHefYkgrw2muV3PlCechakSAehGNTH8Uw9aIn3xLrNS",
       "email": "kimknowles@terrago.com",
       "RoleId": 3,
-      "OperatorId": 1,
+      "OperatorId": 6,
       "ClientId": null
     },
     {
@@ -195,7 +195,7 @@
       "email": "araceliwood@terrago.com",
       "RoleId": 4,
       "OperatorId": null,
-      "ClientId": 15
+      "ClientId": 13
     },
     {
       "id": 23,

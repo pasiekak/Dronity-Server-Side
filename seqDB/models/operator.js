@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
-      Operator.hasOne(models.Account, { unique: true });
+      Operator.hasOne(models.Account, { foreignKey: { unique: true }});
       Operator.hasMany(models.Video);
       Operator.hasMany(models.Image);
     }
