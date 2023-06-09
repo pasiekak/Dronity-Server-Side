@@ -5,7 +5,7 @@ class FakeFactory {
         this.faker = faker;
     }
 
-    createFakeAcc = ({id, login, email, role, operator, client}) => {
+    createFakeAcc = ({id, login, email, role, operator, client, apiKey}) => {
         let fakeAccount = {
             id: id || null,
             login: (login === undefined) ? faker.internet.userName() : login,
@@ -14,6 +14,7 @@ class FakeFactory {
             RoleId: role || 4,
             OperatorId: operator || null,
             ClientId: client || null,
+            api_key: apiKey || faker.string.uuid()
         };
         return fakeAccount;
     }

@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
       unique:true,
       allowNull: false
     },
+    api_key: {
+      type: DataTypes.STRING,
+      unique:true,
+      allowNull: false,
+    }
   }, {
     sequelize,
     modelName: 'Account',
