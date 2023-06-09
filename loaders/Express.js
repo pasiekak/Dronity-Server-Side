@@ -2,6 +2,7 @@ const express = require('express');
 const mainRouter = require('../router/Router');
 const path = require('path');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 class ExpressLoader {
     constructor() {
@@ -14,7 +15,9 @@ class ExpressLoader {
         
         
         // Middleware
+        app.use(express.json())
         app.use(bodyParser.urlencoded({ extended: false }));
+        app.use(morgan('dev'))
 
         // Routers
         app.use('/', mainRouter);

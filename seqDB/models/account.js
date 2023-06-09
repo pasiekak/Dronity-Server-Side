@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const bcrypt = require('bcrypt');
 module.exports = (sequelize, DataTypes) => {
   class Account extends Model {
     /**
@@ -45,7 +46,19 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
-  Account.validate
+  Account.authenticate = async function(login, password) {
+    const account = await Account.findOne({ where: {
+        login: login
+    }});
+    if (account && bcrypt.compareSync(password, account.hash)) {
+        return account;
+    };
+    return null;
+  }
+
+  Account.verifyApiKey = async function(apiKey) {
+    
+  }
 
   return Account;
 };
