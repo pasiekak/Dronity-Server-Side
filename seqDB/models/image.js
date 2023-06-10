@@ -16,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Image.init({
     image_path: DataTypes.STRING,
-    image_name: DataTypes.STRING,
+    image_name: {
+      type: DataTypes.STRING,
+      unique: true
+    },
     image_extension: DataTypes.STRING,
     image_url: DataTypes.STRING
   }, {

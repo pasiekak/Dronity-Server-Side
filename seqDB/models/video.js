@@ -16,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Video.init({
     video_path: DataTypes.STRING,
-    video_name: DataTypes.STRING,
+    video_name: {
+      type: DataTypes.STRING,
+      unique: true
+    },
     video_extension: DataTypes.STRING,
     video_url: DataTypes.STRING
   }, {

@@ -16,9 +16,11 @@
                 // Obsługa odpowiedzi od serwera
                 if(response.data.success) {
                     const apiKey = response.data.apiKey;
+                    const token = response.data.token;
                     localStorage.setItem('apiKey', apiKey);
                     document.querySelector('.loginForm').style.display = 'none';
                     document.getElementById('apiKeyDisplay').innerText = `Twój klucz api: ${apiKey}`;
+                    document.getElementById('jwtDisplay').innerText = `Twój token jwt: ${token}`;
                     document.getElementById('dashboardButton').style.display = 'block';
                 }
               })
@@ -29,7 +31,7 @@
         }
 
         const moveToApi = () => {
-            window.location.href = '/login';
+            window.location.href = '/api';
         }
     </script>
 </head>
@@ -43,7 +45,8 @@
         <input type="submit" value="Zaloguj">
     </form>
 
-    <span id="apiKeyDisplay"></span>
+    <p id="apiKeyDisplay"></p>
+    <p id="jwtDisplay"></p>
     <button id="dashboardButton" style="display: none;" onclick="moveToApi()">Przejdź do api</button>
 </body>
 </html>

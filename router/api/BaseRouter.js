@@ -1,6 +1,6 @@
 const express = require('express');
 
-const verifyApiKey = require('../../middleware/verifyApiKey');
+const { verify } = require('../../middleware/verify');
 
 class BaseRouter {
     constructor(controller) {
@@ -10,12 +10,12 @@ class BaseRouter {
     };
 
     initializeRoutes() {
-        this.router.get('/', verifyApiKey, this.controller.getAll);
-        this.router.post('/', verifyApiKey, this.controller.create);
+        this.router.get('/', verify, this.controller.getAll);
+        this.router.post('/', verify, this.controller.create);
 
-        this.router.get('/:id', verifyApiKey, this.controller.getOne);
-        this.router.put('/:id', verifyApiKey, this.controller.update);
-        this.router.delete('/:id', verifyApiKey, this.controller.delete);
+        this.router.get('/:id', verify, this.controller.getOne);
+        this.router.put('/:id', verify, this.controller.update);
+        this.router.delete('/:id', verify, this.controller.delete);
     };
 
     getRouter() {

@@ -1,4 +1,4 @@
-const Client = require('../../seqDB/models').Account;
+const Client = require('../../seqDB/models').Client;
 const BaseService = require('../BaseService');
 
 class ClientService extends BaseService {
