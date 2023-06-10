@@ -7,27 +7,27 @@ class BaseService extends SequelizeService {
 
     async findOne(id) {
         const result = await super.findOne(id);
-        return { success: true, body: result };
+        return result;
     };
 
     async findAll() {
         const result = await super.findAll();
-        return { success: true, body: result };
+        return result;
     };
 
     async create(body) {
         const result = await super.create(body);
-        return { success: true, body: result };
+        return result;
     }
 
     async update(body, id) {
         const result = await super.update(body, id);
-        return { success: true, body: result };
+        return result;
     }
 
     async destroy(id) {
         const result = await super.destroy(id);
-        return { success: true, body: result };
+        return result;
     }
 }
 

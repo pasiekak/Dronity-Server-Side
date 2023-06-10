@@ -21,6 +21,7 @@ class BaseController {
 
     update = async (req, res) => {
         let id = req.params.id;
+        // TODO: Check if id exists
         let updated = await this.service.update(req.body, { where : { id: id }});
         return res.status(200).send(updated);
     }

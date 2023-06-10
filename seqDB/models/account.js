@@ -56,9 +56,5 @@ module.exports = (sequelize, DataTypes) => {
     return null;
   }
 
-  Account.verifyApiKey = async function(apiKey) {
-    
-  }
-
   return Account;
 };

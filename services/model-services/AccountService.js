@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 const Account = require('../../seqDB/models').Account;
 const BaseService = require('../BaseService');
 

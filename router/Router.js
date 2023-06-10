@@ -1,4 +1,6 @@
 const router = require('express').Router();
+
+const verifyApiKey = require('../middleware/verifyApiKey');
 const apiRouter = require('./api/apiRouter');
 const AccountController = require('../controllers/model-controllers/AccountController');
 const accountController = new AccountController();
@@ -9,12 +11,13 @@ router.use('/api', apiRouter)
 router.get('/', (req, res) => {
     res.redirect('/login')
 })
-router.get('/login',(req, res) => {
+
+// View renders
+router.get('/login', (req, res) => {
     res.render('login');
 })
-router.get('/dashboard',(req,res) => {
-    
-    res.render('dashboard')
+router.get('/api', (req,res) => {
+    res.render('api')
 })
 
 router.post('/login', accountController.authenticate)

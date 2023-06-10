@@ -1,3 +1,4 @@
+
 const BaseController = require('../BaseController');
 const AccountService = require('../../services/model-services/AccountService');
 const accountService = new AccountService();
@@ -14,9 +15,7 @@ class AccountController extends BaseController {
             const account = await accountService.authenticate(login, password);
             if (account) {
                 // Seting authorization header
-                res.set('Authorization', `Bearer ${account.api_key}`)
-
-                return res.status(200).json({ success: true, message: 'Udało Ci się zalogować' })
+                return res.status(200).json({ success: true, message: 'Udało Ci się zalogować' , apiKey: account.api_key})
             }
             return res.status(401).json({ success: false, message: 'Nieprawidłowy login lub hasło '})
         } catch (error) {
