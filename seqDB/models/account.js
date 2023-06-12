@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Account.hasMany(models.Commission, { foreignKey: { name: 'author', allowNull: false }})
       Account.hasMany(models.Commission, { foreignKey: 'contractor' })
+      Account.hasOne(models.Statistics, { foreignKey: { name: 'user', allowNull: false, unique: true }});
     };
   }
   Account.init({
@@ -37,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     api_key: {
       type: DataTypes.STRING,
       unique:true,
-      allowNull: false,
+      allowNull: true,
     }
   }, {
     sequelize,

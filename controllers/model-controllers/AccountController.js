@@ -11,6 +11,7 @@ class AccountController extends BaseController {
 
     // Override or new methods here
     async authenticate(req, res) {
+        console.log(req.body);
         let {login, password} = req.body;
         try {
             const account = await accountService.authenticate(login, password);
@@ -22,7 +23,7 @@ class AccountController extends BaseController {
                 console.log('payload', payload);
                 const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
                 res.header('Authorization', `Bearer ${token}`);
-                return res.status(200).json({ success: true, message: 'Udało Ci się zalogować' , apiKey: account.api_key, token: token})
+                return res.status(200).json({ success: true, message: 'Udało Ci się zalogować' , apiKey: account.api_key})
             }
             return res.status(401).json({ success: false, message: 'Nieprawidłowy login lub hasło '})
         } catch (error) {

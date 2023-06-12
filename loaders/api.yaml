@@ -1,0 +1,1530 @@
+---
+openapi: 3.0.0
+info:
+  title: Drone REST Api
+  description: Api for PAW
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/KRIS24635_1/DroneApi/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: https://localhost:8000
+  description: Development
+security:
+- ApiKeyAuth: []
+- bearerAuthToken: []
+tags:
+- name: Accounts
+  description: Operations related to user accounts
+- name: Operators
+  description: Operations related to operators
+- name: Clients
+  description: Operations related to clients
+- name: Commissions
+  description: Operations related to commissions
+- name: Images
+  description: Operations related to images
+- name: Videos
+  description: Operations related to videos
+- name: Addresses
+  description: Operations related to addresses
+- name: Roles
+  description: Operations related to roles
+paths:
+  /api/accounts:
+    get:
+      tags:
+      - Accounts
+      summary: Get all accounts
+      responses:
+        "200":
+          description: Successfully retrieved accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    post:
+      tags:
+      - Accounts
+      summary: Create a new account
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+            example:
+              login: Test login
+              hash: Hashed with bcrypt password
+              email: test@email.com
+              RoleId: 4
+        required: true
+      responses:
+        "201":
+          description: Account created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201'
+        "409":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/accounts/{id}:
+    get:
+      tags:
+      - Accounts
+      summary: Get an account by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the account
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully retrieved the account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    put:
+      tags:
+      - Accounts
+      summary: Update an account
+      parameters:
+      - name: id
+        in: path
+        description: ID of the account
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        "200":
+          description: Account updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    delete:
+      tags:
+      - Accounts
+      summary: Delete an account
+      parameters:
+      - name: id
+        in: path
+        description: ID of the account
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Account deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/operators:
+    get:
+      tags:
+      - Operators
+      summary: Get all operators
+      responses:
+        "200":
+          description: Successfully retrieved operators
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Operator'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    post:
+      tags:
+      - Operators
+      summary: Create a new operator
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Operator'
+        required: true
+      responses:
+        "201":
+          description: Operator created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201_1'
+        "409":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/operators/{id}:
+    get:
+      tags:
+      - Operators
+      summary: Get an Operator by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Operator
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully retrieved the Operator
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Operator'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    put:
+      tags:
+      - Operators
+      summary: Update an Operator
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Operator
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Operator'
+        required: true
+      responses:
+        "200":
+          description: Operator updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    delete:
+      tags:
+      - Operators
+      summary: Delete an Operator
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Operator
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Operator deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/clients:
+    get:
+      tags:
+      - Clients
+      summary: Get all Clients
+      responses:
+        "200":
+          description: Successfully retrieved Clients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    post:
+      tags:
+      - Clients
+      summary: Create a new Client
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+        required: true
+      responses:
+        "201":
+          description: Client created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201_2'
+        "409":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/clients/{id}:
+    get:
+      tags:
+      - Clients
+      summary: Get an Client by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Client
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully retrieved the Client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    put:
+      tags:
+      - Clients
+      summary: Update an Client
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Client
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+        required: true
+      responses:
+        "200":
+          description: Client updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    delete:
+      tags:
+      - Clients
+      summary: Delete an Client
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Client
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Operator deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/commissions:
+    get:
+      tags:
+      - Commissions
+      summary: Get all Commissions
+      responses:
+        "200":
+          description: Successfully retrieved Commissions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Commission'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    post:
+      tags:
+      - Commissions
+      summary: Create a new Commission
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Commission'
+        required: true
+      responses:
+        "201":
+          description: Commission created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201_3'
+        "409":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/commissions/{id}:
+    get:
+      tags:
+      - Commissions
+      summary: Get an Commission by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Commission
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully retrieved the Commission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commission'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    put:
+      tags:
+      - Commissions
+      summary: Update an Client
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Commission
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Commission'
+        required: true
+      responses:
+        "200":
+          description: Commission updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    delete:
+      tags:
+      - Commissions
+      summary: Delete an Commission
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Commission
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Commission deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/images:
+    get:
+      tags:
+      - Images
+      summary: Get all Images
+      responses:
+        "200":
+          description: Successfully retrieved Images
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Image'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    post:
+      tags:
+      - Images
+      summary: Create a new Image
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Image'
+        required: true
+      responses:
+        "201":
+          description: Image created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201_4'
+        "409":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/images/{id}:
+    get:
+      tags:
+      - Images
+      summary: Get an Image by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Image
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully retrieved the Image
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    put:
+      tags:
+      - Images
+      summary: Update an Image
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Image
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Image'
+        required: true
+      responses:
+        "200":
+          description: Image updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    delete:
+      tags:
+      - Images
+      summary: Delete an Image
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Image
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Image deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/videos:
+    get:
+      tags:
+      - Videos
+      summary: Get all Videos
+      responses:
+        "200":
+          description: Successfully retrieved Videos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Video'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    post:
+      tags:
+      - Videos
+      summary: Create a new Video
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Video'
+        required: true
+      responses:
+        "201":
+          description: Video created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201_5'
+        "409":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/videos/{id}:
+    get:
+      tags:
+      - Videos
+      summary: Get an Video by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Video
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully retrieved the Video
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    put:
+      tags:
+      - Videos
+      summary: Update an Video
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Video
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Video'
+        required: true
+      responses:
+        "200":
+          description: Video updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    delete:
+      tags:
+      - Videos
+      summary: Delete an Video
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Video
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Video deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/addresses:
+    get:
+      tags:
+      - Addresses
+      summary: Get all Addresses
+      responses:
+        "200":
+          description: Successfully retrieved Addresses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    post:
+      tags:
+      - Addresses
+      summary: Create a new Address
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      responses:
+        "201":
+          description: Address created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201_6'
+        "409":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/addresses/{id}:
+    get:
+      tags:
+      - Addresses
+      summary: Get an Address by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Address
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully retrieved the Address
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    put:
+      tags:
+      - Addresses
+      summary: Update an Address
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Address
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      responses:
+        "200":
+          description: Address updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    delete:
+      tags:
+      - Addresses
+      summary: Delete an Address
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Address
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Address deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/roles:
+    get:
+      tags:
+      - Roles
+      summary: Get all Roles
+      responses:
+        "200":
+          description: Successfully retrieved Roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    post:
+      tags:
+      - Roles
+      summary: Create a new Role
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+        required: true
+      responses:
+        "201":
+          description: Role created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201_7'
+        "409":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/roles/{id}:
+    get:
+      tags:
+      - Roles
+      summary: Get an Role by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Role
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully retrieved the Role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    put:
+      tags:
+      - Roles
+      summary: Update an Role
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Role
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+        required: true
+      responses:
+        "200":
+          description: Role updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    delete:
+      tags:
+      - Roles
+      summary: Delete an Role
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Role
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Role deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        hash:
+          type: string
+        email:
+          type: string
+        api_key:
+          type: string
+        RoleId:
+          type: integer
+        OperatorId:
+          type: integer
+        ClientId:
+          type: integer
+    Operator:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        license:
+          type: string
+        city:
+          type: string
+        operational_range:
+          type: integer
+        description:
+          type: string
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+    Commission:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        city:
+          type: string
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        completed:
+          type: boolean
+        payment:
+          type: integer
+        author:
+          type: integer
+        contractor:
+          type: integer
+    Image:
+      type: object
+      properties:
+        id:
+          type: integer
+        image_path:
+          type: string
+        image_name:
+          type: string
+        image_extension:
+          type: string
+        image_url:
+          type: string
+        OperatorId:
+          type: integer
+    Video:
+      type: object
+      properties:
+        id:
+          type: integer
+        video_path:
+          type: string
+        video_name:
+          type: string
+        video_extension:
+          type: string
+        video_url:
+          type: string
+        OperatorId:
+          type: integer
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Address:
+      type: object
+      properties:
+        id:
+          type: integer
+        city:
+          type: string
+        postcode:
+          type: string
+        street:
+          type: string
+        home_number:
+          type: integer
+        ClientId:
+          type: integer
+    inline_response_401:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: Nieautoryzowana próba
+    inline_response_201:
+      type: object
+      properties:
+        created:
+          $ref: '#/components/schemas/Account'
+        message:
+          type: string
+          default: Utworzono
+    inline_response_409:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+    inline_response_404:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Nie znaleziono
+    inline_response_200:
+      type: object
+      properties:
+        message:
+          type: string
+          default: Zaaktualizowano
+    inline_response_200_1:
+      type: object
+      properties:
+        message:
+          type: string
+          default: Usunięto
+    inline_response_201_1:
+      type: object
+      properties:
+        created:
+          $ref: '#/components/schemas/Operator'
+        message:
+          type: string
+          default: Utworzono
+    inline_response_201_2:
+      type: object
+      properties:
+        created:
+          $ref: '#/components/schemas/Client'
+        message:
+          type: string
+          default: Utworzono
+    inline_response_201_3:
+      type: object
+      properties:
+        created:
+          $ref: '#/components/schemas/Commission'
+        message:
+          type: string
+          default: Utworzono
+    inline_response_201_4:
+      type: object
+      properties:
+        created:
+          $ref: '#/components/schemas/Image'
+        message:
+          type: string
+          default: Utworzono
+    inline_response_201_5:
+      type: object
+      properties:
+        created:
+          $ref: '#/components/schemas/Video'
+        message:
+          type: string
+          default: Utworzono
+    inline_response_201_6:
+      type: object
+      properties:
+        created:
+          $ref: '#/components/schemas/Address'
+        message:
+          type: string
+          default: Utworzono
+    inline_response_201_7:
+      type: object
+      properties:
+        created:
+          $ref: '#/components/schemas/Role'
+        message:
+          type: string
+          default: Utworzono
+  responses:
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_404'
+    NotAuthorized:
+      description: Not authorized for this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_401'
+  headers:
+    BearerToken:
+      description: Przykładowy nagłówek authorization z tokenem
+      style: simple
+      explode: false
+      schema:
+        type: string
+        example: Bearer <jwttoken>
+    BearerApiKey:
+      description: Przykładowy nagłówek authorization api key
+      style: simple
+      explode: false
+      schema:
+        type: string
+        example: Drone-Api-Key <apiKey>
+  securitySchemes:
+    bearerAuthToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

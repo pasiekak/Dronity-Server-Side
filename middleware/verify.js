@@ -3,15 +3,18 @@ const jwt = require('jsonwebtoken');
 const AccountService = require('../services/model-services/AccountService');
 const accountService = new AccountService();
 
+
+
 const verify = async (req, res, next) => {
     let header = req.get('Authorization');
+    console.log(req.headers);
     // app or user has to provide a header
     if(header)
     {
         // it could be either Bearer or Drone-Api-Key
-
         // Bearer for jwt token given to user after login
         if(header.startsWith('Bearer ')) {
+            
             token = header.slice(7, header.length);
             try {
                 let data = jwt.verify(token, process.env.JWT_SECRET);
@@ -44,7 +47,7 @@ const verify = async (req, res, next) => {
 
 const verifyAdmin = async (req, res, next) => {
     if(res.locals.role === 'administrator' || res.locals.role === 'moderator') next();
-    else return res.status(401).json({ success: false, message: 'Ten użytkownik nie ma uprawnień do tych zasobów' })
+    else return res.status(401).json({ success: false, message: 'Nieautoryzowana próba' })
 }
 
 module.exports = { verify, verifyAdmin }

@@ -7,20 +7,22 @@
     <title>Home page</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        let apiKey = null;
+        let bearer = null;
+
         const verify = () => {
             const login = document.forms["Login_form"]["login"].value;
             const password = document.forms["Login_form"]["password"].value;
 
-            axios.post('/login', { login, password })
+            axios.post('/login', { login: login, password: password })
               .then(response => {
                 // Obsługa odpowiedzi od serwera
                 if(response.data.success) {
-                    const apiKey = response.data.apiKey;
-                    const token = response.data.token;
-                    localStorage.setItem('apiKey', apiKey);
+                    apiKey = response.data.apiKey;
+                    bearer = response.headers.authorization;
                     document.querySelector('.loginForm').style.display = 'none';
                     document.getElementById('apiKeyDisplay').innerText = `Twój klucz api: ${apiKey}`;
-                    document.getElementById('jwtDisplay').innerText = `Twój token jwt: ${token}`;
+                    document.getElementById('jwtDisplay').innerText = `Twój token jwt: ${bearer}`;
                     document.getElementById('dashboardButton').style.display = 'block';
                 }
               })
@@ -30,8 +32,8 @@
               });
         }
 
-        const moveToApi = () => {
-            window.location.href = '/api';
+        const moveToApi = async () => {
+            window.location.href = '/api-docs';
         }
     </script>
 </head>
