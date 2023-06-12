@@ -2,7 +2,7 @@
     {
         "id": 1,
         "image_path": "media/images",
-        "image_name": "benches-g0ff8c2d11_1280",
+        "image_name": "715-200x200",
         "image_extension": ".jpg",
         "image_url": null,
         "OperatorId": 2
@@ -10,7 +10,7 @@
     {
         "id": 2,
         "image_path": "media/images",
-        "image_name": "bird-g9d9dfd87c_1280",
+        "image_name": "869-200x300",
         "image_extension": ".jpg",
         "image_url": null,
         "OperatorId": 1
@@ -18,7 +18,7 @@
     {
         "id": 3,
         "image_path": "media/images",
-        "image_name": "smart-g07425c842_1280",
+        "image_name": "885-200x300",
         "image_extension": ".jpg",
         "image_url": null,
         "OperatorId": 5

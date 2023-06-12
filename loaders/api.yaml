@@ -738,7 +738,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Image'
+              type: object
+              properties:
+                imageName:
+                  type: string
+                  format: binary
         "404":
           description: The specified resource was not found
           content:
@@ -790,55 +794,72 @@ paths:
               schema:
                 $ref: '#/components/schemas/inline_response_500'
   /api/videos:
-    get:
-      tags:
-      - Videos
-      summary: Get all Videos
-      responses:
-        "200":
-          description: Successfully retrieved Videos
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Video'
-        "401":
-          description: Not authorized for this operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_401'
     post:
+      summary: Upload a new Video
       tags:
-      - Videos
-      summary: Create a new Video
+        - Videos
       requestBody:
-        description: "Example data, can be all properties and can be just single one"
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Video'
+        description: 'Video'
         required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                videoName:
+                  type: string
+                  format: binary
       responses:
-        "201":
-          description: Video created successfully
+        '201':
+          description: Video uploaded successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_201_5'
-        "409":
+                type: object
+                properties:
+                  created: 
+                    $ref: '#/components/schemas/Video'
+                  message: 
+                    type: string
+                    default: 'Utworzono'
+        '409':
           description: Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_409'
-        "401":
-          description: Not authorized for this operation
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
+        '401':
+          $ref: '#/components/responses/NotAuthorized'
+        '400':
+          description: Missing files
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_401'
+                type: object
+                properties:
+                  message:
+                    type: string
+        '413':
+          description: Files are too big
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '422':
+          description: Bad file extension
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   /api/videos/{id}:
     get:
       tags:
@@ -859,46 +880,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Video'
-        "404":
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_404'
-        "401":
-          description: Not authorized for this operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_401'
-    put:
-      tags:
-      - Videos
-      summary: Update an Video
-      parameters:
-      - name: id
-        in: path
-        description: ID of the Video
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      requestBody:
-        description: "Example data, can be all properties and can be just single one"
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Video'
-        required: true
-      responses:
-        "200":
-          description: Video updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_200'
+              type: object
+              properties:
+                imageName:
+                  type: string
+                  format: binary'
         "404":
           description: The specified resource was not found
           content:
@@ -943,6 +929,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_401'
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
   /api/addresses:
     get:
       tags:

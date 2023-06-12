@@ -19,8 +19,7 @@ const commissionRouter = new (require('./BaseRouter'))(commissionController);
 
 const imageRouter = new (require('./ImageRouter'))();
 
-const videoController = new (require('../../controllers/model-controllers/VideoController'))();
-const videoRouter = new (require('./BaseRouter'))(videoController);
+const videoRouter = new (require('./VideoRouter'))();
 
 const statisticsController = new (require('../../controllers/model-controllers/StatisticsController'))();
 const statisticsRouter = new (require('./BaseRouter'))(statisticsController);

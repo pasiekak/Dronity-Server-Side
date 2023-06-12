@@ -1,26 +1,10 @@
 [
     {
         "id": 1,
-        "video_path": "media/videos/operators",
-        "video_name": "V00001",
+        "video_path": "media/videos",
+        "video_name": "pexels-cottonbro-studio-3831869-2160x4096-50fps",
         "video_extension": ".mp4",
         "video_url": null,
         "OperatorId": 4
-    },
-    {
-        "id": 2,
-        "video_path": "media/videos/operators",
-        "video_name": "V00002",
-        "video_extension": ".mp4",
-        "video_url": null,
-        "OperatorId": 3
-    },
-    {
-        "id": 3,
-        "video_path": "media/videos/operators",
-        "video_name": "V00003",
-        "video_extension": ".mp4",
-        "video_url": null,
-        "OperatorId": 1
     }
 ]
