@@ -17,11 +17,13 @@ const addressRouter = new (require('./BaseRouter'))(addressController);
 const commissionController = new (require('../../controllers/model-controllers/CommissionController'))();
 const commissionRouter = new (require('./BaseRouter'))(commissionController);
 
-const imageController = new (require('../../controllers/model-controllers/ImageController'))();
-const imageRouter = new (require('./BaseRouter'))(imageController);
+const imageRouter = new (require('./ImageRouter'))();
 
 const videoController = new (require('../../controllers/model-controllers/VideoController'))();
 const videoRouter = new (require('./BaseRouter'))(videoController);
+
+const statisticsController = new (require('../../controllers/model-controllers/StatisticsController'))();
+const statisticsRouter = new (require('./BaseRouter'))(statisticsController);
 
 router.use('/accounts', accountRouter.router);
 router.use('/clients', clientRouter.router);
@@ -31,5 +33,7 @@ router.use('/addresses', addressRouter.router);
 router.use('/commissions', commissionRouter.router);
 router.use('/images', imageRouter.router);
 router.use('/videos', videoRouter.router);
+router.use('/statistics', statisticsRouter.router);
+
 
 module.exports = router;

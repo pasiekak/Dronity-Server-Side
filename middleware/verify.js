@@ -42,6 +42,18 @@ const verify = async (req, res, next) => {
         } else {
             return res.status(401).json({ success: false, message: 'Nieautoryzowana próba' })
         }
+    } else if (req.query.api_key) {
+        const key = req.query.api_key;
+        const account = await accountService.findOne({ where: { api_key: key } });
+        if (account) {
+            let accountRole = await account.getRole();
+            let roleName = accountRole.name;
+            res.locals.role = roleName;
+            res.locals.api_key = key;
+            next();
+        } else {
+            return res.status(401).json({ success: false, message: 'Nieautoryzowana próba' })
+        } 
     } else {
         return res.status(401).json({ success: false, message: 'Nieautoryzowana próba' })
     }

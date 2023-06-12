@@ -1,6 +1,7 @@
 const express = require('express');
 
 const { verify } = require('../../middleware/verify');
+const count = require('../../middleware/count');
 
 class BaseRouter {
     constructor(controller) {
@@ -10,12 +11,12 @@ class BaseRouter {
     };
 
     initializeRoutes() {
-        this.router.get('/', verify, this.controller.getAll);
-        this.router.post('/', verify, this.controller.create);
+        this.router.get('/', verify, count, this.controller.getAll);
+        this.router.post('/', verify, count, this.controller.create);
 
-        this.router.get('/:id', verify, this.controller.getOne);
-        this.router.put('/:id', verify, this.controller.update);
-        this.router.delete('/:id', verify, this.controller.delete);
+        this.router.get('/:id', verify, count, this.controller.getOne);
+        this.router.put('/:id', verify, count, this.controller.update);
+        this.router.delete('/:id', verify, count, this.controller.delete);
     };
 
     getRouter() {

@@ -1,25 +1,25 @@
 [
     {
         "id": 1,
-        "image_path": "media/images/operators",
-        "image_name": "I00001",
-        "image_extension": ".img",
+        "image_path": "media/images",
+        "image_name": "benches-g0ff8c2d11_1280",
+        "image_extension": ".jpg",
         "image_url": null,
         "OperatorId": 2
     },
     {
         "id": 2,
-        "image_path": "media/images/operators",
-        "image_name": "I00002",
-        "image_extension": ".img",
+        "image_path": "media/images",
+        "image_name": "bird-g9d9dfd87c_1280",
+        "image_extension": ".jpg",
         "image_url": null,
         "OperatorId": 1
     },
     {
         "id": 3,
-        "image_path": "media/images/operators",
-        "image_name": "I00003",
-        "image_extension": ".img",
+        "image_path": "media/images",
+        "image_name": "smart-g07425c842_1280",
+        "image_extension": ".jpg",
         "image_url": null,
         "OperatorId": 5
     }

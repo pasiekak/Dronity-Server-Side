@@ -15,12 +15,6 @@ class ExpressLoader {
             key: fs.readFileSync(path.join(__dirname, '../', 'cert', 'key.pem')),
             cert: fs.readFileSync(path.join(__dirname, '../', 'cert', 'cert.pem'))
         }, app);
-        
-        // Monitor setup
-
-        app.use(async (req,res,next) => {
-            next();
-        })
 
         // Docs setup
         const swaggerUI = require('swagger-ui-express');

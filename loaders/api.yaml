@@ -2,16 +2,14 @@
 openapi: 3.0.0
 info:
   title: Drone REST Api
-  description: Api for PAW
+  description: Api documentation for PAW. Before any tests, click 'Authorize' and provide token or api key. Accounts, statistics, roles are not available for normal users.
   version: 1.0.0
 servers:
-- url: https://virtserver.swaggerhub.com/KRIS24635_1/DroneApi/1.0.0
-  description: SwaggerHub API Auto Mocking
 - url: https://localhost:8000
   description: Development
 security:
-- ApiKeyAuth: []
-- bearerAuthToken: []
+- JWT_Token: []
+- Api_Key: []
 tags:
 - name: Accounts
   description: Operations related to user accounts
@@ -29,6 +27,8 @@ tags:
   description: Operations related to addresses
 - name: Roles
   description: Operations related to roles
+- name: Statistics
+  description: Operations related to statistics
 paths:
   /api/accounts:
     get:
@@ -652,55 +652,72 @@ paths:
               schema:
                 $ref: '#/components/schemas/inline_response_401'
   /api/images:
-    get:
-      tags:
-      - Images
-      summary: Get all Images
-      responses:
-        "200":
-          description: Successfully retrieved Images
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Image'
-        "401":
-          description: Not authorized for this operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_401'
     post:
+      summary: Upload a new Image
       tags:
-      - Images
-      summary: Create a new Image
+        - Images
       requestBody:
-        description: "Example data, can be all properties and can be just single one"
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Image'
+        description: 'Image'
         required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                imageName:
+                  type: string
+                  format: binary
       responses:
-        "201":
-          description: Image created successfully
+        '201':
+          description: Image uploaded successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_201_4'
-        "409":
+                type: object
+                properties:
+                  created: 
+                    $ref: '#/components/schemas/Image'
+                  message: 
+                    type: string
+                    default: 'Utworzono'
+        '409':
           description: Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_409'
-        "401":
-          description: Not authorized for this operation
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
+        '401':
+          $ref: '#/components/responses/NotAuthorized'
+        '400':
+          description: Missing files
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_401'
+                type: object
+                properties:
+                  message:
+                    type: string
+        '413':
+          description: Files are too big
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '422':
+          description: Bad file extension
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   /api/images/{id}:
     get:
       tags:
@@ -722,45 +739,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Image'
-        "404":
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_404'
-        "401":
-          description: Not authorized for this operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_401'
-    put:
-      tags:
-      - Images
-      summary: Update an Image
-      parameters:
-      - name: id
-        in: path
-        description: ID of the Image
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      requestBody:
-        description: "Example data, can be all properties and can be just single one"
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Image'
-        required: true
-      responses:
-        "200":
-          description: Image updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_200'
         "404":
           description: The specified resource was not found
           content:
@@ -805,6 +783,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_401'
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
   /api/videos:
     get:
       tags:
@@ -1267,6 +1251,160 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_401'
+  /api/statistics:
+    get:
+      tags:
+      - Statistics
+      summary: Get all Statistics
+      responses:
+        "200":
+          description: Successfully retrieved Statistics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Statistics'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    post:
+      tags:
+      - Statistics
+      summary: Create a new Statistics
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+        required: true
+      responses:
+        "201":
+          description: Statistics created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201_7'
+        "409":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+  /api/statistics/{id}:
+    get:
+      tags:
+      - Statistics
+      summary: Get an Statistics by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Statistics
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully retrieved the Statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistics'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    put:
+      tags:
+      - Statistics
+      summary: Update an Statistics
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Statistics
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: "Example data, can be all properties and can be just single one"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+        required: true
+      responses:
+        "200":
+          description: Statistics updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+    delete:
+      tags:
+      - Statistics
+      summary: Delete an Statistics
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Statistics
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Statistics deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+        "401":
+          description: Not authorized for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
 components:
   schemas:
     Account:
@@ -1395,6 +1533,15 @@ components:
           type: integer
         ClientId:
           type: integer
+    Statistics:
+      type: object
+      properties:
+        id:
+          type: integer
+        numberOfRequests:
+          type: integer
+        api_key:
+          type: string
     inline_response_401:
       type: object
       properties:
@@ -1504,27 +1651,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/inline_response_401'
-  headers:
-    BearerToken:
-      description: Przykładowy nagłówek authorization z tokenem
-      style: simple
-      explode: false
-      schema:
-        type: string
-        example: Bearer <jwttoken>
-    BearerApiKey:
-      description: Przykładowy nagłówek authorization api key
-      style: simple
-      explode: false
-      schema:
-        type: string
-        example: Drone-Api-Key <apiKey>
   securitySchemes:
-    bearerAuthToken:
+    JWT_Token:
       type: http
+      description: Podaj sam token
       scheme: bearer
       bearerFormat: JWT
-    ApiKeyAuth:
+    Api_Key:
       type: apiKey
+      description: Podaj w formacie 'Drone-Api-Key klucz'
       name: Authorization
       in: header

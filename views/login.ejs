@@ -6,39 +6,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        let apiKey = null;
-        let bearer = null;
-
-        const verify = () => {
-            const login = document.forms["Login_form"]["login"].value;
-            const password = document.forms["Login_form"]["password"].value;
-
-            axios.post('/login', { login: login, password: password })
-              .then(response => {
-                // Obsługa odpowiedzi od serwera
-                if(response.data.success) {
-                    apiKey = response.data.apiKey;
-                    bearer = response.headers.authorization;
-                    document.querySelector('.loginForm').style.display = 'none';
-                    document.getElementById('apiKeyDisplay').innerText = `Twój klucz api: ${apiKey}`;
-                    document.getElementById('jwtDisplay').innerText = `Twój token jwt: ${bearer}`;
-                    document.getElementById('dashboardButton').style.display = 'block';
-                }
-              })
-              .catch(error => {
-                // Obsługa błędu
-                console.error('Wystąpił błąd:', error);
-              });
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
         }
 
-        const moveToApi = async () => {
-            window.location.href = '/api-docs';
+        .loginForm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-    </script>
+
+        .loginForm h1 {
+        font-size: 20px;
+        color: #333;
+        margin-top: 0;
+        }
+
+        .loginForm input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        }
+
+        .loginForm input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+
+        .loginForm input[type="submit"]:hover {
+        background-color: #45a049;
+        }
+
+        .loginForm input[type="submit"]:focus {
+        outline: none;
+        }
+
+        .loginForm input[type="text"]:focus,
+        .loginForm input[type="password"]:focus {
+        border-color: #4CAF50;
+        }
+
+    </style>
 </head>
 <body>
-    <form class="loginForm" name="Login_form" onsubmit="verify(); return false">
+    <form class="loginForm" name="Login_form" method="post" onsubmit="verify(); return false">
         <h1>Witaj, zaloguj się</h1>
 
         <input type="text" name="login" placeholder="Login" required autofocus/>
@@ -46,9 +76,5 @@
 
         <input type="submit" value="Zaloguj">
     </form>
-
-    <p id="apiKeyDisplay"></p>
-    <p id="jwtDisplay"></p>
-    <button id="dashboardButton" style="display: none;" onclick="moveToApi()">Przejdź do api</button>
 </body>
 </html>

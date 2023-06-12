@@ -20,8 +20,7 @@ class AccountController extends BaseController {
                 const roleName = role.name;
                 const payload = { login: account.login, email: account.email, role: roleName, api_key: account.api_key };
                 const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
-                res.header('Authorization', `Bearer ${token}`);
-                return res.status(200).json({ success: true, message: 'Udało Ci się zalogować' , apiKey: account.api_key})
+                return res.status(200).render('logged',{ success: true, message: 'Udało Ci się zalogować' , apiKey: account.api_key, token: token})
             }
             return res.status(401).json({ success: false, message: 'Nieprawidłowy login lub hasło '})
         } catch (error) {

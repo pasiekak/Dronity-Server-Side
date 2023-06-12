@@ -13,11 +13,11 @@ class AccountRouter extends BaseRouter {
 
     initializeRoutes() {
         this.router.get('/', verify, verifyAdmin, count, this.controller.getAll);
-        this.router.post('/', verify, verifyAdmin, this.controller.create);
+        this.router.post('/', verify, verifyAdmin, count, this.controller.create);
 
-        this.router.get('/:id', verify, verifyAdmin, this.controller.getOne);
-        this.router.put('/:id', verify, verifyAdmin, this.controller.update);
-        this.router.delete('/:id', verify, verifyAdmin, this.controller.delete);
+        this.router.get('/:id', verify, verifyAdmin, count, this.controller.getOne);
+        this.router.put('/:id', verify, verifyAdmin, count, this.controller.update);
+        this.router.delete('/:id', verify, verifyAdmin, count, this.controller.delete);
     };
 
     getRouter() {
