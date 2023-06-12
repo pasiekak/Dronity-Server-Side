@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Statistics.belongsTo(models.Account, { foreignKey: { name: 'api_key', allowNull: false, unique: true, targetKey: 'api_key' }});
+      Statistics.belongsTo(models.Account, { targetKey: 'api_key', foreignKey: 'api_key' });
 
     }
   }
   Statistics.init({
-    numerOfRequests: {
+    numberOfRequests: {
         type: DataTypes.INTEGER
-    },
+    }
   }, {
     sequelize,
     modelName: 'Statistics',

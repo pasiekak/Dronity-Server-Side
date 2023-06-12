@@ -19,6 +19,7 @@ const verify = async (req, res, next) => {
             try {
                 let data = jwt.verify(token, process.env.JWT_SECRET);
                 res.locals.role = data.role;
+                res.locals.api_key = data.api_key;
                 next();
             } catch (error) {
                 console.error('function verify', error);
@@ -33,6 +34,7 @@ const verify = async (req, res, next) => {
                 let accountRole = await account.getRole();
                 let roleName = accountRole.name;
                 res.locals.role = roleName;
+                res.locals.api_key = key;
                 next();
             } else {
                 return res.status(401).json({ success: false, message: 'Nieautoryzowana próba' })
