@@ -41,7 +41,10 @@ class ImageController extends BaseController {
         if (found) {
             // Odczytaj plik z dysku
             let filepath = path.join(__dirname, '../../', found.image_path, found.image_name + found.image_extension);
-            return res.status(200).sendFile(filepath);
+            let fsimg = fs.readFileSync(filepath);
+            let img = Buffer.from(fsimg, 'base64')
+            console.log(img);
+            return res.set({'Content-Type': 'image/png', 'Content-Length': img.length}).end(img)
         }
         return res.status(404).json({ message: 'Nie znaleziono' });
     }

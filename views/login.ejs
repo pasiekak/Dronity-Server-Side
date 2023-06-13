@@ -6,6 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const ws = new WebSocket("wss://localhost:8000");
+        ws.addEventListener("open", () =>{
+          console.log("WebSocket connected");
+          ws.send("How are you?");
+        });
+         
+        ws.addEventListener('message', function (event) {
+            const currentDate = event.data;
+            document.getElementById('date-container').innerText = currentDate;
+
+        });
+
+        ws.addEventListener('close', (event) => {
+            console.log(`WebSocket connection closed with code: ${event.code}`);
+        })
+
+        ws.addEventListener('error', (err) => {
+            console.log(`An error in WebSocket connection: ${err}`);
+        })
+    </script>
+    
     <style>
         body {
         font-family: Arial, sans-serif;
@@ -64,11 +86,22 @@
         .loginForm input[type="password"]:focus {
         border-color: #4CAF50;
         }
+        .loginForm #date-container {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 1rem;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
     </style>
 </head>
 <body>
     <form class="loginForm" name="Login_form" method="post" onsubmit="verify(); return false">
+        <span id="date-container"></span>
         <h1>Witaj, zaloguj się</h1>
 
         <input type="text" name="login" placeholder="Login" required autofocus/>

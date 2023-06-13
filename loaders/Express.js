@@ -1,11 +1,13 @@
 const express = require('express');
-const mainRouter = require('../router/Router');
 const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const https = require('https');
 const fs = require('fs');
 const cors = require('cors');
+const { WebSocketServer} = require('ws');
+
+const mainRouter = require('../router/Router');
 
 class ExpressLoader {
     constructor() {
@@ -15,6 +17,28 @@ class ExpressLoader {
             key: fs.readFileSync(path.join(__dirname, '../', 'cert', 'key.pem')),
             cert: fs.readFileSync(path.join(__dirname, '../', 'cert', 'cert.pem'))
         }, app);
+
+        // Setup for ssl websocketserver
+        const wss = new WebSocketServer({ server: sslServer });
+
+        wss.on('connection', async (ws) => {
+            ws.on('error', console.error);
+          
+            ws.on('message', function message(data) {
+              console.log('received: %s', data);
+            });
+          
+            const interval = setInterval(() => {
+                const currentDate = new Date().toUTCString();
+                ws.send(currentDate)
+            },1000)
+            ws.on('close', () => {
+                clearInterval(interval)
+            })
+          });
+
+        
+
 
         // Docs setup
         const swaggerUI = require('swagger-ui-express');
