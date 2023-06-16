@@ -14,5 +14,5 @@ node_modules
 .sass-cache
 
 # Ignore cert and pem
-cert
-cert/*
+cert/key.pem
+cert/cert.pem

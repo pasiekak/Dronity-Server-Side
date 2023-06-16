@@ -13,32 +13,33 @@ class ExpressLoader {
     constructor() {
         const app = express();
         const PORT = process.env.PORT || 8000;
-        const sslServer = https.createServer({
-            key: fs.readFileSync(path.join(__dirname, '../', 'cert', 'key.pem')),
-            cert: fs.readFileSync(path.join(__dirname, '../', 'cert', 'cert.pem'))
-        }, app);
-
-        // Setup for ssl websocketserver
-        const wss = new WebSocketServer({ server: sslServer });
-
-        wss.on('connection', async (ws) => {
-            ws.on('error', console.error);
-          
-            ws.on('message', function message(data) {
-              console.log('received: %s', data);
+        let sslServer;
+        try {
+            sslServer = https.createServer({
+                key: fs.readFileSync(path.join(__dirname, '../', 'cert', 'key.pem')),
+                cert: fs.readFileSync(path.join(__dirname, '../', 'cert', 'cert.pem'))
+            }, app);
+            // Setup for ssl websocketserver
+            const wss = new WebSocketServer({ server: sslServer });
+            wss.on('connection', async (ws) => {
+                ws.on('error', console.error);
+              
+                ws.on('message', function message(data) {
+                  console.log('received: %s', data);
+                });
+                
+                // basic sending current date to client
+                const interval = setInterval(() => {
+                    const currentDate = new Date().toUTCString();
+                    ws.send(currentDate)
+                },1000)
+                ws.on('close', () => {
+                    clearInterval(interval)
+                })
             });
-          
-            const interval = setInterval(() => {
-                const currentDate = new Date().toUTCString();
-                ws.send(currentDate)
-            },1000)
-            ws.on('close', () => {
-                clearInterval(interval)
-            })
-          });
-
-        
-
+        } catch(err) {
+            console.log(err);
+        }
 
         // Docs setup
         const swaggerUI = require('swagger-ui-express');
@@ -60,9 +61,16 @@ class ExpressLoader {
         // Routers
         app.use('/', mainRouter);
 
-        this.server = sslServer.listen(PORT, () => {
-            console.log(`SSL Server listening on port: ${PORT}`);
-        });
+        if(sslServer) {
+            this.server = sslServer.listen(PORT, () => {
+                console.log(`SSL Server listening on port: ${PORT}`);
+            });
+        } else {
+            this.server = app.listen(PORT, () => {
+                console.log(`Server listening on port: ${PORT}`);
+            })
+        }
+        
     }
 
     getServer() {

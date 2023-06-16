@@ -31,7 +31,7 @@ JWT_SECRET="******" # Enter your secret password here
 ```npm
 npm test
 ```
-8. Optional: Change name of _example_.pem to cert.pem and key.pem and fill them with your key and certificate
+8. Change name of _example_.pem to cert.pem and key.pem and fill them with your key and certificate. Otherwise https and secure websocket wont work.
 9. Run project
 ```npm
 npm run dev

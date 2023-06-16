@@ -6,7 +6,9 @@ info:
   version: 1.0.0
 servers:
 - url: https://localhost:8000
-  description: Development
+  description: Secure server
+- url: http://localhost:8000
+  description: Not secure server
 security:
 - JWT_Token: []
 - Api_Key: []
