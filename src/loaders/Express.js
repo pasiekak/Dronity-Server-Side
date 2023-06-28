@@ -16,8 +16,8 @@ class ExpressLoader {
         let sslServer;
         try {
             sslServer = https.createServer({
-                key: fs.readFileSync(path.join(__dirname, '../', 'cert', 'key.pem')),
-                cert: fs.readFileSync(path.join(__dirname, '../', 'cert', 'cert.pem'))
+                key: fs.readFileSync(path.join(__dirname, '../../', 'cert', 'key.pem')),
+                cert: fs.readFileSync(path.join(__dirname, '../../', 'cert', 'cert.pem'))
             }, app);
             // Setup for ssl websocketserver
             const wss = new WebSocketServer({ server: sslServer });
@@ -30,7 +30,7 @@ class ExpressLoader {
                 
                 // basic sending current date to client
                 const interval = setInterval(() => {
-                    const currentDate = new Date().toUTCString();
+                    const currentDate = new Date().toLocaleString();
                     ws.send(currentDate)
                 },1000)
                 ws.on('close', () => {
@@ -44,11 +44,11 @@ class ExpressLoader {
         // Docs setup
         const swaggerUI = require('swagger-ui-express');
         const YAML = require('yamljs');
-        const swaggerJsDocs = YAML.load(path.join(__dirname, 'api.yaml'));
+        const swaggerJsDocs = YAML.load(path.join(__dirname, '../../' , 'api.yaml'));
         app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
 
         // Setup view engine
-        app.set('views', path.join(__dirname, '../', 'views'));
+        app.set('views', path.join(__dirname, '../../', 'views'));
         app.set('view engine', 'ejs');
         
         

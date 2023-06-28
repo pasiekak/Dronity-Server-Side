@@ -1,35 +1,40 @@
 const BaseController = require('../BaseController');
-const VideoService = require('../../services/model-services/VideoService');
-const videoService = new VideoService();
+const ImageService = require('../../services/model-services/ImageService');
+const imageService = new ImageService();
 const path = require('path');
 const fs = require('fs');
-class VideoController extends BaseController {
+
+class ImageController extends BaseController {
     constructor() {
-        super(videoService);
+        super(imageService);
     }
 
     // Override or new methods here
     create = async (req, res) => {
         const files = req.files;
+
+        
+
         Object.keys(files).forEach(key => {
-            const filepath = path.join(__dirname, '../../', 'media', 'videos', files[key].name)
+            const filepath = path.join(__dirname, '../../../', 'media', 'images', files[key].name)
             files[key].mv(filepath, async (err) => {
                 if (err) return res.status(500).json({ err })
                 try {
                     // Dodaj informacje o pliku do bazy danych
-                    const video = await this.service.create({
-                        video_name: path.basename(files[key].name, path.extname(files[key].name)),
-                        video_path: path.join('media', 'videos'),
-                        video_extension: path.extname(files[key].name)
+                    const image = await imageService.create({
+                        image_name: path.basename(files[key].name, path.extname(files[key].name)),
+                        image_path: path.join('media', 'images'),
+                        image_extension: path.extname(files[key].name)
                     });
+                    return res.status(201).json({ message: 'Images uploaded successfully' });
                 } catch (error) {
                     console.error('Błąd przy zapisie pliku do bazy danych:', error);
-                    return res.status(500).json({ message: 'Wystąpił błąd serwera' });
+                    return res.status(500).json({ message: error.message });
                 }
             })
         })
         
-        return res.status(201).json({ message: 'Video uploaded successfully' });
+        
 
     }
 
@@ -38,8 +43,11 @@ class VideoController extends BaseController {
         let found = await this.service.findOne({ where: {id:id}});
         if (found) {
             // Odczytaj plik z dysku
-            let filepath = path.join(__dirname, '../../', found.video_path, found.video_name + found.video_extension);
-            return res.status(200).download(filepath);
+            let filepath = path.join(__dirname, '../../../', found.image_path, found.image_name + found.image_extension);
+            let fsimg = fs.readFileSync(filepath);
+            let img = Buffer.from(fsimg, 'base64')
+            console.log(img);
+            return res.set({'Content-Type': 'image/png', 'Content-Length': img.length}).end(img)
         }
         return res.status(404).json({ message: 'Nie znaleziono' });
     }
@@ -48,13 +56,12 @@ class VideoController extends BaseController {
         let found = await this.service.findOne({ where: {id:id}});
         if (found) {
             // Odczytaj plik z dysku
-            let filepath = path.join(__dirname, '../../', found.video_path, found.video_name + found.video_extension);
+            let filepath = path.join(__dirname, '../../../', found.image_path, found.image_name + found.image_extension);
             try{
                 fs.unlinkSync(filepath);
                 await found.destroy({ where: { id: id }});
                 return res.status(200).send({ message: 'Usunięto' });
             } catch (err) {
-                console.log(err);
                 return res.status(500).json({ message: 'Wystąpił błąd' })
             }
         }
@@ -62,4 +69,4 @@ class VideoController extends BaseController {
     }
 }
 
-module.exports = VideoController;
+module.exports = ImageController;

@@ -1,0 +1,15 @@
+{
+  "development": {
+    "dialect": "sqlite",
+    "storage": "./src/seqDB/database/database.sqlite3"
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": "./src/seqDB/database/test-database.sqlite3",
+    "logging": false
+  },
+  "production": {
+    "dialect": "sqlite",
+    "storage": "./src/seqDB/database/database.sqlite3"
+  }
+}

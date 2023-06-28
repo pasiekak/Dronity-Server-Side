@@ -733,11 +733,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: object
-          properties:
-            imageName:
-              type: string
-              format: binary
+          type: integer
       responses:
         "200":
           description: Successfully retrieved the Image
