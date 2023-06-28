@@ -12,9 +12,6 @@ class ImageController extends BaseController {
     // Override or new methods here
     create = async (req, res) => {
         const files = req.files;
-
-        
-
         Object.keys(files).forEach(key => {
             const filepath = path.join(__dirname, '../../../', 'media', 'images', files[key].name)
             files[key].mv(filepath, async (err) => {
