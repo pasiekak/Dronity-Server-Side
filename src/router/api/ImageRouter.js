@@ -16,13 +16,22 @@ class ImageRouter extends BaseRouter {
     };
 
     initializeRoutes() {
-        this.router.post('/',verify,verifyAdmin,count,
+
+        this.router.post('/',verify, count,
         fileUpload({ createParentPath: true }),
         filesPayloadExists,
         fileExtLimiter(['.png','.jpg','.jpeg']),
         fileSizeLimiter,
         this.controller.create);
-        this.router.get('/:id', verify, verifyAdmin, count, this.controller.getOne);
+        
+        this.router.post('/accounts/:accountID', verify, count,
+        fileUpload({ createParentPath: true }),
+        filesPayloadExists,
+        fileExtLimiter(['.png','.jpg','.jpeg']),
+        fileSizeLimiter, 
+        this.controller.createAccountProfileImage)
+
+        this.router.get('/:id', verify, count, this.controller.getOne);
         this.router.delete('/:id', verify, verifyAdmin, count, this.controller.delete);
     };
 

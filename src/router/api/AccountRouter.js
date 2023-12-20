@@ -1,28 +1,14 @@
 const express = require('express');
-
-const AccountController = require('../../controllers/model-controllers/AccountController');
-const accountController = new AccountController();
-const BaseRouter = require('./BaseRouter');
 const { verify, verifyAdmin } = require('../../middleware/verify');
 const count = require('../../middleware/count');
+const AccountController = require('../../controllers/model-controllers/AccountController');
+const accountController = new AccountController();
 
-class AccountRouter extends BaseRouter {
-    constructor() {
-        super(accountController)
-    };
+const router = new express.Router();
+router.get('/', verify, verifyAdmin, count, accountController.getAll);
+router.post('/', verify, count, accountController.create);
+router.get('/:id', verify, count, accountController.getOne);
+router.put('/:id', verify, count, accountController.update);
+router.delete('/:id', verify, verifyAdmin, count, accountController.delete);
 
-    initializeRoutes() {
-        this.router.get('/', verify, verifyAdmin, count, this.controller.getAll);
-        this.router.post('/', verify, verifyAdmin, count, this.controller.create);
-
-        this.router.get('/:id', verify, verifyAdmin, count, this.controller.getOne);
-        this.router.put('/:id', verify, verifyAdmin, count, this.controller.update);
-        this.router.delete('/:id', verify, verifyAdmin, count, this.controller.delete);
-    };
-
-    getRouter() {
-        return this.router;
-    }
-};
-
-module.exports = AccountRouter;
+module.exports = router;

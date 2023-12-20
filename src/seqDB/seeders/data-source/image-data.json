@@ -5,7 +5,8 @@
         "image_name": "715-200x200",
         "image_extension": ".jpg",
         "image_url": null,
-        "OperatorId": 2
+        "AccountId": 2,
+        "profile": false
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "image_name": "869-200x300",
         "image_extension": ".jpg",
         "image_url": null,
-        "OperatorId": 1
+        "AccountId": 1,
+        "profile": false
     },
     {
         "id": 3,
@@ -21,6 +23,7 @@
         "image_name": "885-200x300",
         "image_extension": ".jpg",
         "image_url": null,
-        "OperatorId": 5
+        "AccountId": 1,
+        "profile": true
     }
 ]

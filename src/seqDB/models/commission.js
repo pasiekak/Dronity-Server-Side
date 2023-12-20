@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Commission.init({
     title: DataTypes.STRING,
-    description: DataTypes.STRING,
+    description: DataTypes.TEXT,
     city: DataTypes.STRING,
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,

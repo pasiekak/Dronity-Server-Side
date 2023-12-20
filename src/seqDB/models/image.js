@@ -11,7 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Image.belongsTo(models.Operator)
+      Image.belongsTo(models.Account)
+    }
+
+    // Dodajemy własną metodę walidacji przed zapisem
+    async validateProfileFlag() {
+      if (this.profile) {
+        // Sprawdź, czy już istnieje inne zdjęcie z profile === true dla tego AccountID
+        const existingProfileImage = await Image.findOne({
+          where: {
+            AccountId: this.AccountId,
+            profile: true,
+          },
+        });
+
+        if (existingProfileImage && existingProfileImage.id !== this.id) {
+          throw new Error('There can be only one profile image');
+        }
+      }
     }
   }
   Image.init({
@@ -21,12 +38,22 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     image_extension: DataTypes.STRING,
-    image_url: DataTypes.STRING
+    image_url: DataTypes.STRING,
+    profile: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     modelName: 'Image',
     freezeTableName: true,
     timestamps: false,
   });
+
+
+  Image.beforeSave(async (image, options) => {
+    await image.validateProfileFlag();
+  });
+
   return Image;
 };

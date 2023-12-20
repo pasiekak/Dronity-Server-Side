@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Statistics.init({
     numberOfRequests: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        defaultValue: 0
     }
   }, {
     sequelize,

@@ -5,14 +5,10 @@
     },
     {
         "id": 2,
-        "name": "moderator"
-    },
-    {
-        "id": 3,
         "name": "operator"
     },
     {
-        "id": 4,
+        "id": 3,
         "name": "client"
     }
 ]

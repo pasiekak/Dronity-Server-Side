@@ -6,20 +6,19 @@ const accountService = new AccountService();
 
 
 const verify = async (req, res, next) => {
-    let header = req.get('Authorization');
-    console.log(req.headers);
+    const header = req.get('Authorization');
+    const token = req.cookies['Authorization'];
     // app or user has to provide a header
-    if(header)
+    if(header || token)
     {
         // it could be either Bearer or Drone-Api-Key
         // Bearer for jwt token given to user after login
-        if(header.startsWith('Bearer ')) {
-            
-            token = header.slice(7, header.length);
+        if(token) {
             try {
-                let data = jwt.verify(token, process.env.JWT_SECRET);
-                res.locals.role = data.role;
-                res.locals.api_key = data.api_key;
+                let data = jwt.verify(token.slice('7',token.length), process.env.JWT_SECRET);
+                const account = await accountService.findOne({where: { id: data.id }});
+                res.locals.role = account.role;
+                res.locals.api_key = account.api_key;
                 next();
             } catch (error) {
                 console.error('function verify', error);
@@ -27,7 +26,7 @@ const verify = async (req, res, next) => {
             }
 
         // Drone-Api-Key for api key given to user once after login, any application has to provide it in header
-        } else if (header.startsWith('Drone-Api-Key ')) {
+        } else if (header) {
             key = header.slice(14, header.length);
             const account = await accountService.findOne({where: { api_key: key }});
             if(account) {
@@ -60,7 +59,7 @@ const verify = async (req, res, next) => {
 }
 
 const verifyAdmin = async (req, res, next) => {
-    if(res.locals.role === 'administrator' || res.locals.role === 'moderator') next();
+    if(res.locals.role === 'administrator') next();
     else return res.status(401).json({ success: false, message: 'Nieautoryzowana próba' })
 }
 

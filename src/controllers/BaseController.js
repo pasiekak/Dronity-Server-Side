@@ -7,7 +7,7 @@ class BaseController {
         let id = req.params.id;
         let found = await this.service.findOne({ where: {id:id}});
         if (found) return res.status(200).json(found);
-        return res.status(404).json({ message: 'Nie znaleziono' });
+        return res.status(404).send();
     }
 
     getAll = async (req, res) => {
@@ -21,21 +21,21 @@ class BaseController {
             created = await this.service.create(req.body);
             return res.status(201).json({ created, message: 'Utworzono'});
         } catch (error) {
-            return res.status(409).json({ error: error.message });
+            return res.status(409).send();
         }
     }
 
     update = async (req, res) => {
-        let id = req.params.id;
+        const id = req.params.id;
         try {
-            let found = await this.service.findOne({ where: {id:id}});
+            const found = await this.service.findOne({ where: { id: id}});
             if(found) {
                 let updated = await this.service.update(req.body, { where : { id: id }});
                 return res.status(200).json({ message: 'Zaaktualizowano' });
             }
-            return res.status(404).json({ message: 'Nie znaleziono' });
+            return res.status(404).send();
         } catch (error) {
-            return res.status(400).json(error);
+            return res.status(400).send();
         }
     }
 
@@ -47,10 +47,10 @@ class BaseController {
                 let destroyed = await this.service.destroy({ where: { id: id }});
                 return res.status(200).json({ message: 'Usunięto' });
             }
-            return res.status(404).json({ message: 'Nie znaleziono' });
+            return res.status(404).send();
         }
         catch (error) {
-            return res.status(400).json(error);
+            return res.status(400).send();
         }
     }
 }

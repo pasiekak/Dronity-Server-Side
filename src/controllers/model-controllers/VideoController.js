@@ -14,7 +14,7 @@ class VideoController extends BaseController {
         Object.keys(files).forEach(key => {
             const filepath = path.join(__dirname, '../../../', 'media', 'videos', files[key].name)
             files[key].mv(filepath, async (err) => {
-                if (err) return res.status(500).json({ err })
+                if (err) return res.status(500).send();
                 try {
                     // Dodaj informacje o pliku do bazy danych
                     const video = await this.service.create({
@@ -25,7 +25,7 @@ class VideoController extends BaseController {
                     return res.status(201).json({ message: 'Video uploaded successfully' });
                 } catch (error) {
                     console.error('Błąd przy zapisie pliku do bazy danych:', error);
-                    return res.status(500).json({ message: 'Wystąpił błąd serwera' });
+                    return res.status(500).send();
                 }
             })
         })
@@ -39,7 +39,7 @@ class VideoController extends BaseController {
             let filepath = path.join(__dirname, '../../../', found.video_path, found.video_name + found.video_extension);
             return res.status(200).download(filepath);
         }
-        return res.status(404).json({ message: 'Nie znaleziono' });
+        return res.status(404).send();
     }
     delete = async (req, res) => {
         let id = req.params.id;
@@ -53,10 +53,10 @@ class VideoController extends BaseController {
                 return res.status(200).send({ message: 'Usunięto' });
             } catch (err) {
                 console.log(err);
-                return res.status(500).json({ message: 'Wystąpił błąd' })
+                return res.status(500).send();
             }
         }
-        return res.status(404).json({ message: 'Nie znaleziono' });
+        return res.status(404).send();
     }
 }
 

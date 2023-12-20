@@ -6,17 +6,10 @@ const accountController = new AccountController();
 
 router.use('/api', apiRouter)
 
-// Redirects
-router.get('/', (req, res) => {
-    res.redirect('/login')
-})
-
-// View renders
-router.get('/login', (req, res) => {
-    res.render('login');
-})
-
-router.post('/login', accountController.authenticate)
+router.post('/login', accountController.authenticate);
+router.post('/register', accountController.registerFirstStep);
+router.get('/activation', accountController.register);
+router.delete('/logout', accountController.logout);
 
 
 module.exports = router;

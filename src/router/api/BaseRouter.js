@@ -13,7 +13,6 @@ class BaseRouter {
     initializeRoutes() {
         this.router.get('/', verify, count, this.controller.getAll);
         this.router.post('/', verify, count, this.controller.create);
-
         this.router.get('/:id', verify, count, this.controller.getOne);
         this.router.put('/:id', verify, count, this.controller.update);
         this.router.delete('/:id', verify, count, this.controller.delete);

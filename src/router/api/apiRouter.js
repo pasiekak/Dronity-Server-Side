@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const accountRouter = new (require('./AccountRouter'))();
+const accountRouter = require('./AccountRouter');
 
 const clientController = new (require('../../controllers/model-controllers/ClientController'))();
 const clientRouter = new (require('./BaseRouter'))(clientController);
@@ -24,7 +24,7 @@ const videoRouter = new (require('./VideoRouter'))();
 const statisticsController = new (require('../../controllers/model-controllers/StatisticsController'))();
 const statisticsRouter = new (require('./BaseRouter'))(statisticsController);
 
-router.use('/accounts', accountRouter.router);
+router.use('/accounts', accountRouter);
 router.use('/clients', clientRouter.router);
 router.use('/operators', operatorRouter.router);
 router.use('/roles', roleRouter.router);

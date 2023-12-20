@@ -8,6 +8,7 @@ const cors = require('cors');
 const { WebSocketServer} = require('ws');
 
 const mainRouter = require('../router/Router');
+const cookieParser = require('cookie-parser');
 
 class ExpressLoader {
     constructor() {
@@ -54,7 +55,8 @@ class ExpressLoader {
         
         // Middleware
         app.use(cors());
-        app.use(express.json())
+        app.use(express.json());
+        app.use(cookieParser());
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(morgan('dev'))
 

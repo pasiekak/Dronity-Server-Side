@@ -11,13 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Account.belongsTo(models.Role, { foreignKey: { allowNull: false }});
+      Account.belongsTo(models.Role, { foreignKey: { allowNull: false, defaultValue: 3 }});
       Account.belongsTo(models.Operator, { foreignKey: { unique: true }});
       Account.belongsTo(models.Client, { foreignKey: { unique: true }});
-
-      Account.hasMany(models.Commission, { foreignKey: { name: 'author', allowNull: false }})
-      Account.hasMany(models.Commission, { foreignKey: 'contractor' })
+      
+      Account.hasMany(models.Commission, { as: 'AuthorCommissions', foreignKey: { name: 'author', allowNull: false }})
+      Account.hasMany(models.Commission, { as: 'ContractorCommissions', foreignKey: 'contractor' })
+      
       Account.hasOne(models.Statistics, { sourceKey: 'api_key', foreignKey: 'api_key' });
+
+      Account.hasMany(models.Image);
     };
   }
   Account.init({
@@ -44,7 +47,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Account',
     freezeTableName: true,
-    timestamps: false,
+    updatedAt: false,
+    createdAt: true
   });
 
   Account.authenticate = async function(login, password) {
