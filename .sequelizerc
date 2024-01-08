@@ -1,10 +1,9 @@
-// .sequelizerc
-
 const path = require('path');
+require('dotenv').config(); // Wczytaj zmienne środowiskowe z pliku .env
 
 module.exports = {
-    'config' : path.resolve('src', 'seqDB', 'config', 'config.json'),
-    'models-path' : path.resolve('src', 'seqDB', 'models'),
-    'migrations-path' : path.resolve('src', 'seqDB', 'migrations'),
-    'seeders-path' : path.resolve('src', 'seqDB', 'seeders')
-}
+  'config': path.resolve('src', 'seqDB', 'config', `config.${process.env.NODE_ENV}.json`),
+  'models-path': path.resolve('src', 'seqDB', 'models'),
+  'migrations-path': path.resolve('src', 'seqDB', 'migrations'),
+  'seeders-path': path.resolve('src', 'seqDB', 'seeders'),
+};

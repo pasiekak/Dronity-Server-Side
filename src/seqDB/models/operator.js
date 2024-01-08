@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Operator.hasOne(models.Account, { foreignKey: { unique: true }});
       Operator.hasMany(models.Video);
+      Operator.hasMany(models.Commission, { as: 'ContractorCommissions', foreignKey: 'contractor' })
     }
   }
   Operator.init({

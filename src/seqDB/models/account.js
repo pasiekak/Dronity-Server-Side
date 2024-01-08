@@ -15,9 +15,6 @@ module.exports = (sequelize, DataTypes) => {
       Account.belongsTo(models.Operator, { foreignKey: { unique: true }});
       Account.belongsTo(models.Client, { foreignKey: { unique: true }});
       
-      Account.hasMany(models.Commission, { as: 'AuthorCommissions', foreignKey: { name: 'author', allowNull: false }})
-      Account.hasMany(models.Commission, { as: 'ContractorCommissions', foreignKey: 'contractor' })
-      
       Account.hasOne(models.Statistics, { sourceKey: 'api_key', foreignKey: 'api_key' });
 
       Account.hasMany(models.Image);

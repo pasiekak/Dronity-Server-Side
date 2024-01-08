@@ -1,0 +1,10 @@
+{
+    "use_env_variable": "DATABASE_PRODUCTION_URI",
+    "dialect": "mysql",
+    "logging": false,
+    "define": {
+      "freezeTableName": true,
+      "charset": "utf8mb4",
+      "collate": "utf8mb4_bin"
+    }
+}

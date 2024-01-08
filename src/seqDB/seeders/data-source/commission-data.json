@@ -7,9 +7,10 @@
       "start_date": "2005-08-24 08:59:09",
       "end_date": "2016-07-09 07:37:11",
       "completed": false,
+      "started": false,
       "payment": 888,
-      "author": 10,
-      "contractor": 11
+      "author": 1,
+      "contractor": 1
   },
   {
       "id": 2,
@@ -19,9 +20,10 @@
       "start_date": "2012-05-31 07:42:11",
       "end_date": "2020-07-29 08:37:47",
       "completed": false,
+      "started": false,
       "payment": 4088,
-      "author": 6,
-      "contractor": 6
+      "author": 2,
+      "contractor": 1
   },
   {
       "id": 3,
@@ -31,9 +33,10 @@
       "start_date": "2008-09-04 12:00:33",
       "end_date": "2016-07-22 04:05:52",
       "completed": true,
+      "started": true,
       "payment": 1039,
       "author": 3,
-      "contractor": 6
+      "contractor": 1
   },
   {
       "id": 4,
@@ -43,8 +46,9 @@
       "start_date": "2011-09-11 14:39:07",
       "end_date": "2018-01-02 11:19:04",
       "completed": false,
+      "started": true,
       "payment": 3388,
-      "author": 9,
+      "author": 1,
       "contractor": 4
   },
   {
@@ -55,9 +59,10 @@
       "start_date": "2007-01-23 13:21:29",
       "end_date": "2016-08-10 17:24:47",
       "completed": true,
+      "started": true,
       "payment": 2269,
       "author": 2,
-      "contractor": 2
+      "contractor": 5
   },
   {
       "id": 6,
@@ -67,6 +72,7 @@
       "start_date": "2003-06-03 22:19:32",
       "end_date": "2020-09-21 21:01:45",
       "completed": true,
+      "started": true,
       "payment": 8136,
       "author": 3,
       "contractor": 2
@@ -79,6 +85,7 @@
       "start_date": "2012-09-26 09:37:26",
       "end_date": "2015-02-17 04:00:23",
       "completed": true,
+      "started": true,
       "payment": 693,
       "author": 5,
       "contractor": 2

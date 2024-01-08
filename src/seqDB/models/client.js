@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Client.hasOne(models.Address, { foreignKey: { allowNull: false, unique: true }});
       Client.hasOne(models.Account, { foreignKey: { unique: true }});
+      Client.hasMany(models.Commission, { as: 'AuthorCommissions', foreignKey: { name: 'author', allowNull: false }})
 
     }
   }
