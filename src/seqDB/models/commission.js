@@ -34,7 +34,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      payment: DataTypes.INTEGER,
+      suggested_payment: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      agreed_payment: DataTypes.FLOAT,
     },
     {
       sequelize,

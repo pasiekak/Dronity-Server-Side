@@ -27,7 +27,7 @@ class AccountController extends BaseController {
             {
               model: models.Commission,
               as: "ContractorCommissions",
-              attributes: ['id']
+              attributes: ["id"],
             },
           ],
         },
@@ -38,7 +38,7 @@ class AccountController extends BaseController {
             {
               model: models.Commission,
               as: "AuthorCommissions",
-              attributes: ['id']
+              attributes: ["id"],
             },
           ],
         },
