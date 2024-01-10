@@ -19,14 +19,19 @@ const verify = async (req, res, next) => {
         const account = await accountService.findOne({
           where: { id: data.id },
         });
-        res.locals.role = account.role;
+        let accountRole = await account.getRole();
+        let roleName = accountRole.name;
+        res.locals.operatorID = account.OperatorId;
+        res.locals.clientID = account.ClientId;
+        res.locals.accountID = account.id;
+        res.locals.role = roleName;
         res.locals.api_key = account.api_key;
         next();
       } catch (error) {
         console.error("function verify", error);
         return res
           .status(400)
-          .json({ success: false, message: "Wystąpił błąd" });
+          .json({ success: false, message: "Nieautoryzowana próba (token)" });
       }
 
       // Drone-Api-Key for api key given to user once after login, any application has to provide it in header
@@ -36,18 +41,21 @@ const verify = async (req, res, next) => {
       if (account) {
         let accountRole = await account.getRole();
         let roleName = accountRole.name;
+        res.locals.operatorID = account.OperatorId;
+        res.locals.clientID = account.ClientId;
+        res.locals.accountID = account.id;
         res.locals.role = roleName;
         res.locals.api_key = key;
         next();
       } else {
         return res
           .status(401)
-          .json({ success: false, message: "Nieautoryzowana próba" });
+          .json({ success: false, message: "Nieautoryzowana próba (klucz)" });
       }
     } else {
       return res
         .status(401)
-        .json({ success: false, message: "Nieautoryzowana próba" });
+        .json({ success: false, message: "Nieautoryzowana próba (brak klucza i tokenu w headerach)" });
     }
   } else if (req.query.api_key) {
     const key = req.query.api_key;
@@ -61,12 +69,12 @@ const verify = async (req, res, next) => {
     } else {
       return res
         .status(401)
-        .json({ success: false, message: "Nieautoryzowana próba" });
+        .json({ success: false, message: "Nie ma takiego konta" });
     }
   } else {
     return res
       .status(401)
-      .json({ success: false, message: "Nieautoryzowana próba" });
+      .json({ success: false, message: "Nieautoryzowana próba (brak klucza i tokenu)" });
   }
 };
 

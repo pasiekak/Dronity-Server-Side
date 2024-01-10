@@ -13,7 +13,7 @@ const fileExtLimiter = (allowedExtArray) => {
         if(!allowed) {
             const message = 'File extension not allowed'
 
-            return res.status(422).json({ message });
+            return res.status(422).json({ success: false, message });
         }
         next()
     }

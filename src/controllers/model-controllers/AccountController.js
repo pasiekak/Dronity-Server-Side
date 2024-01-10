@@ -48,8 +48,16 @@ class AccountController extends BaseController {
         },
       ],
     });
-    if (found) return res.status(200).json(found);
-    return res.status(404).send();
+    if (found)
+      return res
+        .status(200)
+        .send({ success: true, message: "Pobrano rekord.", data: found });
+    return res
+      .status(404)
+      .send({
+        success: false,
+        message: "Nie odnaleziono takiego użytkownika.",
+      });
   };
   // New methods here
   authenticate = async (req, res) => {
@@ -78,21 +86,31 @@ class AccountController extends BaseController {
           { Role: payload.Role, id: payload.id },
           { expires: new Date(Date.now() + 3 * 60 * 60 * 1000 - 1000) }
         );
-        return res.status(200).send();
+        return res
+          .status(200)
+          .send({ success: true, message: "Pomyślnie zalogowano." });
       }
-      return res.status(401).send();
+      return res
+        .status(401)
+        .send({ success: false, message: "Nie ma takiego konta." });
     } catch (error) {
       console.log(error);
-      return res.status(500).send();
+      return res
+        .status(500)
+        .send({ success: false, message: "Wystąpił błąd." });
     }
   };
   logout = async (req, res) => {
     try {
       res.clearCookie("User");
       res.clearCookie("Authorization");
-      return res.status(200).send();
+      return res
+        .status(200)
+        .send({ success: true, message: "Pomyślnie wylogowano." });
     } catch (err) {
-      return res.status(500).send();
+      return res
+        .status(500)
+        .send({ success: false, message: "Nie udało się wylogować konta." });
     }
   };
 
@@ -102,7 +120,7 @@ class AccountController extends BaseController {
       const user = await accountService.findOne({
         where: { [Op.or]: [{ login: login }, { email: email }] },
       });
-      if (user !== null) throw Error();
+      if (user !== null) return res.status(409).send({ success: false, message: "Taki użytkownik już istnieje."})
       let newKey = genAPIKey();
       let ok = false;
       while (!ok) {
@@ -143,14 +161,23 @@ class AccountController extends BaseController {
 
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
-          res.status(503).send();
+          res
+            .status(503)
+            .send({ success: false, message: "Nie udało się wysłać maila." });
         } else {
-          res.status(200).send();
+          res
+            .status(200)
+            .send({
+              success: true,
+              message: "Wysłaliśmy maila na twój email.",
+            });
         }
       });
     } catch (err) {
       console.log(err);
-      return res.status(500).send();
+      return res
+        .status(500)
+        .send({ success: false, message: "Wystąpił błąd." });
     }
   };
 
@@ -160,16 +187,34 @@ class AccountController extends BaseController {
 
       const decodedToken = jwt.decode(token, { complete: true });
       if (!decodedToken) {
-        return res.status(403).send();
+        return res
+          .status(403)
+          .send({
+            success: false,
+            message: "Nieautoryzowana próba weryfikacji konta.",
+          });
       } else {
         const { login, email, api_key, hash, RoleId } = decodedToken.payload;
         await accountService.create({ login, email, api_key, hash, RoleId });
-        return res.status(201).send();
+        return res
+          .status(201)
+          .send({
+            success: true,
+            message: "Pomyślnie zweryfikano użytkownika i utworzono konto.",
+          });
       }
     } catch (err) {
       console.log(err);
-      if (err.message === "Validation error") return res.status(422).send();
-      return res.status(500).send();
+      if (err.message === "Validation error")
+        return res
+          .status(422)
+          .send({
+            success: false,
+            message: "Wystąpił błąd przy tworzeniu konta.",
+          });
+      return res
+        .status(500)
+        .send({ success: false, message: "Wystąpił błąd." });
     }
   };
 }

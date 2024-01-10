@@ -14,7 +14,7 @@ class VideoController extends BaseController {
         Object.keys(files).forEach(key => {
             const filepath = path.join(__dirname, '../../../', 'media', 'videos', files[key].name)
             files[key].mv(filepath, async (err) => {
-                if (err) return res.status(500).send();
+                if (err) return res.status(500).send({ success: false, message: "Błąd zapisu filmu."});
                 try {
                     // Dodaj informacje o pliku do bazy danych
                     const video = await this.service.create({
@@ -22,10 +22,10 @@ class VideoController extends BaseController {
                         video_path: path.join('media', 'videos'),
                         video_extension: path.extname(files[key].name)
                     });
-                    return res.status(201).json({ message: 'Video uploaded successfully' });
+                    return res.status(201).json({ success: true, message: "Udało się wgrać film.", data: video });
                 } catch (error) {
                     console.error('Błąd przy zapisie pliku do bazy danych:', error);
-                    return res.status(500).send();
+                    return res.status(500).send({ success: false, message: "Błąd zapisu rekordu filmu do bazy danych."});
                 }
             })
         })
@@ -39,7 +39,7 @@ class VideoController extends BaseController {
             let filepath = path.join(__dirname, '../../../', found.video_path, found.video_name + found.video_extension);
             return res.status(200).download(filepath);
         }
-        return res.status(404).send();
+        return res.status(404).send({ success: false, message: "Nie odnaleziono takiego filmu."});
     }
     delete = async (req, res) => {
         let id = req.params.id;
@@ -50,13 +50,13 @@ class VideoController extends BaseController {
             try{
                 fs.unlinkSync(filepath);
                 await found.destroy({ where: { id: id }});
-                return res.status(200).send({ message: 'Usunięto' });
+                return res.status(200).send({ success: true, message: "Udało się usunąć zdjęcie." });
             } catch (err) {
                 console.log(err);
-                return res.status(500).send();
+                return res.status(500).send({ success: false, message: "Nie udało się usunąć zdjęcia."});
             }
         }
-        return res.status(404).send();
+        return res.status(404).send({ success: false, message: "Nie udało się usunąć zdjęcia, ponieważ takiego nie ma."});
     }
 }
 

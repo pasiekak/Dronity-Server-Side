@@ -15,7 +15,7 @@ class ImageController extends BaseController {
         Object.keys(files).forEach(key => {
             const filepath = path.join(__dirname, '../../../', 'media', 'images', files[key].name)
             files[key].mv(filepath, async (err) => {
-                if (err) return res.status(500).send();
+                if (err) return res.status(500).send({ success: false, message: "Nie udało się zapisać zdjęć."});
                 try {
                     // Dodaj informacje o pliku do bazy danych
                     const image = await imageService.create({
@@ -23,10 +23,10 @@ class ImageController extends BaseController {
                         image_path: path.join('media', 'images'),
                         image_extension: path.extname(files[key].name)
                     });
-                    return res.status(201).json({ message: 'Images uploaded successfully' });
+                    return res.status(201).json({ success: true, message: "Pomyślnie zapisano zdjęcie.", data: image });
                 } catch (error) {
                     console.error('Błąd przy zapisie pliku do bazy danych:', error);
-                    return res.status(500).send();
+                    return res.status(500).send({ success: false, message: "Nie udało się zapisać zdjęć do bazy danych." });
                 }
             })
         })
@@ -52,13 +52,13 @@ class ImageController extends BaseController {
             }
             const filepath = path.join(__dirname, '../../../', 'media', 'images', newName+extension)
             profileImage.mv(filepath, async (err) => {
-                if (err) return res.status(500).send({message: 'Error occured while saving image'});
+                if (err) return res.status(500).send({ success: false, message: "Nie udało się zapisać zdjęcia profilowego."});
                 try {
                     const oldProfileImage = await imageService.findOne({where: { AccountId: accountID, profile: true }});
                     if(oldProfileImage) {
                         const oldPath = path.join(__dirname, '../../../', 'media', 'images', oldProfileImage.image_name+oldProfileImage.image_extension);
                         fs.unlink(oldPath, (err => {
-                            if(err) return res.status(400).send();
+                            if(err) return res.status(400).send({ success: false, message: "Nie udało się usunąć poprzedniego zdjęcia profilowego."});
                         }));
                         await oldProfileImage.destroy();
                     }
@@ -71,11 +71,11 @@ class ImageController extends BaseController {
                         AccountId: accountID
                     });
                     if(image) {
-                        return res.status(201).json({ message: 'Images uploaded successfully' });
+                        return res.status(201).json({ success: true, message: "Pomyślnie ustawiono zdjęcie profilowe.", data: image });
                     }
                 } catch (error) {
                     console.log(error);
-                    res.status(400).json({message: error.message})
+                    res.status(400).json({ success: false, message: "Wystąpił błąd."})
                 }
             })
         }
@@ -85,13 +85,12 @@ class ImageController extends BaseController {
         let id = req.params.id;
         let found = await this.service.findOne({ where: {id:id}});
         if (found) {
-            // Odczytaj plik z dysku
             let filepath = path.join(__dirname, '../../../', found.image_path, found.image_name + found.image_extension);
             let fsimg = fs.readFileSync(filepath);
             let img = Buffer.from(fsimg, 'base64')
             return res.set({'Content-Type': 'image/png', 'Content-Length': img.length}).end(img)
         }
-        return res.status(404).send();
+        return res.status(404).send({ success: false, message: "Nie udało się pobrać zdjęcia."});
     }
     delete = async (req, res) => {
         let id = req.params.id;
@@ -102,12 +101,12 @@ class ImageController extends BaseController {
             try {
                 fs.unlinkSync(filepath);
                 await found.destroy({ where: { id: id }});
-                return res.status(200).send({ message: 'Usunięto' });
+                return res.status(200).send({ success: true, message: 'Pomyślnie usunięto zdjęcie.' });
             } catch (err) {
-                return res.status(500).send();
+                return res.status(500).send({ success: false, message: "Nie udało się usunąć zdjęcia."} );
             }
         }
-        return res.status(404).send();
+        return res.status(404).send({ success: false, message: "Nie udało się usunąć zdjęcia ponieważ ono nie istnieje."});
     }
 }
 
