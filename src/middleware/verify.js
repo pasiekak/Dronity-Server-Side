@@ -53,9 +53,10 @@ const verify = async (req, res, next) => {
           .json({ success: false, message: "Nieautoryzowana próba (klucz)" });
       }
     } else {
-      return res
-        .status(401)
-        .json({ success: false, message: "Nieautoryzowana próba (brak klucza i tokenu w headerach)" });
+      return res.status(401).json({
+        success: false,
+        message: "Nieautoryzowana próba (brak klucza i tokenu w headerach)",
+      });
     }
   } else if (req.query.api_key) {
     const key = req.query.api_key;
@@ -72,9 +73,10 @@ const verify = async (req, res, next) => {
         .json({ success: false, message: "Nie ma takiego konta" });
     }
   } else {
-    return res
-      .status(401)
-      .json({ success: false, message: "Nieautoryzowana próba (brak klucza i tokenu)" });
+    return res.status(401).json({
+      success: false,
+      message: "Nieautoryzowana próba (brak klucza i tokenu)",
+    });
   }
 };
 
@@ -86,4 +88,12 @@ const verifyAdmin = async (req, res, next) => {
       .json({ success: false, message: "Nieautoryzowana próba" });
 };
 
-module.exports = { verify, verifyAdmin };
+const verifyOperator = async (req, res, next) => {
+  if (["operator", "administrator"].includes(res.locals.role)) next();
+  else
+    return res
+      .status(401)
+      .json({ success: false, message: "Nieautoryzowana próba" });
+};
+
+module.exports = { verify, verifyAdmin, verifyOperator };

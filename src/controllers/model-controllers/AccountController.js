@@ -28,6 +28,8 @@ class AccountController extends BaseController {
               model: models.Commission,
               as: "ContractorCommissions",
               attributes: ["id"],
+              separate: true,
+              order: [["createdAt", "DESC"]],
             },
           ],
         },
@@ -39,6 +41,8 @@ class AccountController extends BaseController {
               model: models.Commission,
               as: "AuthorCommissions",
               attributes: ["id"],
+              separate: true,
+              order: [["createdAt", "DESC"]],
             },
           ],
         },
@@ -48,16 +52,11 @@ class AccountController extends BaseController {
         },
       ],
     });
-    if (found)
-      return res
-        .status(200)
-        .send({ success: true, message: "Pobrano rekord.", data: found });
-    return res
-      .status(404)
-      .send({
-        success: false,
-        message: "Nie odnaleziono takiego użytkownika.",
-      });
+    if (found) return res.status(200).send({ success: true, message: "Pobrano rekord.", data: found });
+    return res.status(404).send({
+      success: false,
+      message: "Nie odnaleziono takiego użytkownika.",
+    });
   };
   // New methods here
   authenticate = async (req, res) => {
@@ -76,41 +75,28 @@ class AccountController extends BaseController {
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
           expiresIn: "3h",
         });
+        // CHANGE SECURE ON PRODUCTION
         res.cookie("Authorization", `Bearer ${token}`, {
           expires: new Date(Date.now() + 3 * 60 * 60 * 1000),
-          secure: true,
+          secure: false,
           httpOnly: true,
         });
-        res.cookie(
-          "User",
-          { Role: payload.Role, id: payload.id },
-          { expires: new Date(Date.now() + 3 * 60 * 60 * 1000 - 1000) }
-        );
-        return res
-          .status(200)
-          .send({ success: true, message: "Pomyślnie zalogowano." });
+        res.cookie("User", { Role: payload.Role, id: payload.id }, { expires: new Date(Date.now() + 3 * 60 * 60 * 1000 - 1000) });
+        return res.status(200).send({ success: true, message: "Pomyślnie zalogowano." });
       }
-      return res
-        .status(401)
-        .send({ success: false, message: "Nie ma takiego konta." });
+      return res.status(401).send({ success: false, message: "Nie ma takiego konta." });
     } catch (error) {
       console.log(error);
-      return res
-        .status(500)
-        .send({ success: false, message: "Wystąpił błąd." });
+      return res.status(500).send({ success: false, message: "Wystąpił błąd." });
     }
   };
   logout = async (req, res) => {
     try {
       res.clearCookie("User");
       res.clearCookie("Authorization");
-      return res
-        .status(200)
-        .send({ success: true, message: "Pomyślnie wylogowano." });
+      return res.status(200).send({ success: true, message: "Pomyślnie wylogowano." });
     } catch (err) {
-      return res
-        .status(500)
-        .send({ success: false, message: "Nie udało się wylogować konta." });
+      return res.status(500).send({ success: false, message: "Nie udało się wylogować konta." });
     }
   };
 
@@ -120,7 +106,7 @@ class AccountController extends BaseController {
       const user = await accountService.findOne({
         where: { [Op.or]: [{ login: login }, { email: email }] },
       });
-      if (user !== null) return res.status(409).send({ success: false, message: "Taki użytkownik już istnieje."})
+      if (user !== null) return res.status(409).send({ success: false, message: "Taki użytkownik już istnieje." });
       let newKey = genAPIKey();
       let ok = false;
       while (!ok) {
@@ -161,23 +147,17 @@ class AccountController extends BaseController {
 
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
-          res
-            .status(503)
-            .send({ success: false, message: "Nie udało się wysłać maila." });
+          res.status(503).send({ success: false, message: "Nie udało się wysłać maila." });
         } else {
-          res
-            .status(200)
-            .send({
-              success: true,
-              message: "Wysłaliśmy maila na twój email.",
-            });
+          res.status(200).send({
+            success: true,
+            message: "Wysłaliśmy maila na twój email.",
+          });
         }
       });
     } catch (err) {
       console.log(err);
-      return res
-        .status(500)
-        .send({ success: false, message: "Wystąpił błąd." });
+      return res.status(500).send({ success: false, message: "Wystąpił błąd." });
     }
   };
 
@@ -187,34 +167,26 @@ class AccountController extends BaseController {
 
       const decodedToken = jwt.decode(token, { complete: true });
       if (!decodedToken) {
-        return res
-          .status(403)
-          .send({
-            success: false,
-            message: "Nieautoryzowana próba weryfikacji konta.",
-          });
+        return res.status(403).send({
+          success: false,
+          message: "Nieautoryzowana próba weryfikacji konta.",
+        });
       } else {
         const { login, email, api_key, hash, RoleId } = decodedToken.payload;
         await accountService.create({ login, email, api_key, hash, RoleId });
-        return res
-          .status(201)
-          .send({
-            success: true,
-            message: "Pomyślnie zweryfikano użytkownika i utworzono konto.",
-          });
+        return res.status(201).send({
+          success: true,
+          message: "Pomyślnie zweryfikano użytkownika i utworzono konto.",
+        });
       }
     } catch (err) {
       console.log(err);
       if (err.message === "Validation error")
-        return res
-          .status(422)
-          .send({
-            success: false,
-            message: "Wystąpił błąd przy tworzeniu konta.",
-          });
-      return res
-        .status(500)
-        .send({ success: false, message: "Wystąpił błąd." });
+        return res.status(422).send({
+          success: false,
+          message: "Wystąpił błąd przy tworzeniu konta.",
+        });
+      return res.status(500).send({ success: false, message: "Wystąpił błąd." });
     }
   };
 }

@@ -3,12 +3,16 @@ class SequelizeService {
         this.model = Model;
     }
 
+    findAndCountAll(options) {
+        return this.model.findAndCountAll(options);
+    }
+
     findOne(id) {
         return this.model.findOne(id);
     };
 
-    findAll() {
-        return this.model.findAll();
+    findAll(options) {
+        return this.model.findAll(options);
     };
 
     create(body) {
@@ -19,8 +23,8 @@ class SequelizeService {
         return this.model.update(body, id);
     };
 
-    destroy(id) {
-        return this.model.destroy(id);
+    destroy(options) {
+        return this.model.destroy(options);
     };
 }
 

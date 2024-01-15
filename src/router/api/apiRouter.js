@@ -1,6 +1,8 @@
 const router = require("express").Router();
 
 const accountRouter = require("./AccountRouter");
+const commissionRouter = require("./CommissionRouter");
+const applicationRouter = require("./ApplicationRouter");
 
 const clientController =
   new (require("../../controllers/model-controllers/ClientController"))();
@@ -18,10 +20,6 @@ const addressController =
   new (require("../../controllers/model-controllers/AddressController"))();
 const addressRouter = new (require("./BaseRouter"))(addressController);
 
-const commissionController =
-  new (require("../../controllers/model-controllers/CommissionController"))();
-const commissionRouter = new (require("./BaseRouter"))(commissionController);
-
 const imageRouter = new (require("./ImageRouter"))();
 
 const videoRouter = new (require("./VideoRouter"))();
@@ -31,11 +29,12 @@ const statisticsController =
 const statisticsRouter = new (require("./BaseRouter"))(statisticsController);
 
 router.use("/accounts", accountRouter);
-router.use("/clients", clientRouter.router);
+router.use("/commissions", commissionRouter);
+router.use("/applications", applicationRouter);
 router.use("/operators", operatorRouter.router);
+router.use("/clients", clientRouter.router);
 router.use("/roles", roleRouter.router);
 router.use("/addresses", addressRouter.router);
-router.use("/commissions", commissionRouter.router);
 router.use("/images", imageRouter.router);
 router.use("/videos", videoRouter.router);
 router.use("/statistics", statisticsRouter.router);

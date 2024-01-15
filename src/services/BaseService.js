@@ -10,8 +10,13 @@ class BaseService extends SequelizeService {
         return result;
     };
 
-    async findAll() {
-        const result = await super.findAll();
+    async findAndCountAll(options) {
+        const result = await super.findAndCountAll(options);
+        return result;
+    }
+
+    async findAll(options) {
+        const result = await super.findAll(options);
         return result;
     };
 
@@ -25,8 +30,8 @@ class BaseService extends SequelizeService {
         return result;
     }
 
-    async destroy(id) {
-        const result = await super.destroy(id);
+    async destroy(options) {
+        const result = await super.destroy(options);
         return result;
     }
 }

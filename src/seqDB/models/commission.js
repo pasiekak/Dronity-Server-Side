@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const Sequelize = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Commission extends Model {
     /**
@@ -16,6 +17,29 @@ module.exports = (sequelize, DataTypes) => {
       Commission.belongsTo(models.Operator, {
         foreignKey: "contractor",
         as: "Contractor",
+      });
+      Commission.belongsToMany(models.Operator, {
+        through: {
+          model: sequelize.define(
+            "Application",
+            {
+              offered_payment: {
+                type: Sequelize.FLOAT,
+                allowNull: false,
+              },
+              accepted: {
+                type: Sequelize.BOOLEAN,
+                allowNull: true,
+              },
+            },
+            {
+              createdAt: true,
+              updatedAt: false,
+            }
+          ),
+          unique: false, // Jeśli tabela asocjacyjna ma mieć indeksy dla kolumn, ustaw na true
+        },
+        as: "ApplicationOperator",
       });
     }
   }
@@ -37,15 +61,27 @@ module.exports = (sequelize, DataTypes) => {
       suggested_payment: {
         type: DataTypes.FLOAT,
         allowNull: false,
+        validate: {
+          min: 1.0,
+          max: 99999.0,
+        },
       },
-      agreed_payment: DataTypes.FLOAT,
+      agreed_payment: {
+        type: DataTypes.FLOAT,
+        validate: {
+          min: 1.0,
+          max: 99999.0,
+        },
+      },
     },
     {
       sequelize,
       modelName: "Commission",
       freezeTableName: true,
-      timestamps: false,
+      updatedAt: false,
+      createdAt: true,
     }
   );
+
   return Commission;
 };
