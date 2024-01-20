@@ -10,5 +10,6 @@ router.post("/", verify, verifyOperator, count, applicationController.create);
 router.get("/:id", verify, count, applicationController.getOne);
 router.put("/:id", verify, count, applicationController.update);
 router.delete("/:commissionID", verify, verifyOperator, count, applicationController.delete);
+router.get("/operator/:operatorID", verify, verifyOperator, count, applicationController.getOperatorApplications)
 
 module.exports = router;

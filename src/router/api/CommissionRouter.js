@@ -11,5 +11,6 @@ router.get("/:id", verify, count, commissionController.getOne);
 router.put("/:id", verify, count, commissionController.update);
 router.delete("/:id", verify, verifyAdmin, count, commissionController.delete);
 router.put("/:commissionID/applicant/:operatorID", verify, count, commissionController.updateApplication);
+router.get("/:commissionID/operatorApplications/", verify, count, commissionController.getCommissionOperatorApplications);
 
 module.exports = router;

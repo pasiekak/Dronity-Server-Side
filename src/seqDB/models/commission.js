@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "Author",
       });
       Commission.belongsTo(models.Operator, {
-        foreignKey: "contractor",
+        foreignKey: { name: "contractor", allowNull: true },
         as: "Contractor",
       });
       Commission.belongsToMany(models.Operator, {
@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
           model: sequelize.define(
             "Application",
             {
+              id: {
+                type: Sequelize.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+              },
               offered_payment: {
                 type: Sequelize.FLOAT,
                 allowNull: false,
@@ -31,13 +36,21 @@ module.exports = (sequelize, DataTypes) => {
                 type: Sequelize.BOOLEAN,
                 allowNull: true,
               },
+              rejectType: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+              },
+              customComment: {
+                type: Sequelize.STRING,
+                allowNull: true,
+              },
             },
             {
               createdAt: true,
               updatedAt: false,
             }
           ),
-          unique: false, // Jeśli tabela asocjacyjna ma mieć indeksy dla kolumn, ustaw na true
+          unique: false,
         },
         as: "ApplicationOperator",
       });
@@ -50,13 +63,16 @@ module.exports = (sequelize, DataTypes) => {
       city: DataTypes.STRING,
       start_date: DataTypes.DATE,
       end_date: DataTypes.DATE,
-      completed: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      started: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+      status: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+        validate: {
+          isIn: {
+            args: [[1, 2, 3, 4, 5]],
+            msg: "Status zlecenia musi być liczbą jedną z 1,2,3,4, 5",
+          },
+        },
       },
       suggested_payment: {
         type: DataTypes.FLOAT,
@@ -80,6 +96,7 @@ module.exports = (sequelize, DataTypes) => {
       freezeTableName: true,
       updatedAt: false,
       createdAt: true,
+      hooks: {},
     }
   );
 

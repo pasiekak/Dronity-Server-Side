@@ -1,43 +1,37 @@
-const express = require('express');
-
-const ImageController = require('../../controllers/model-controllers/ImageController');
+const express = require("express");
+const { verify, verifyAdmin, verifyOperator } = require("../../middleware/verify");
+const count = require("../../middleware/count");
+const ImageController = require("../../controllers/model-controllers/ImageController");
 const imageController = new ImageController();
-const BaseRouter = require('./BaseRouter');
-const { verify, verifyAdmin } = require('../../middleware/verify');
-const count = require('../../middleware/count');
-const fileUpload = require('express-fileupload');
-const filesPayloadExists = require('../../middleware/filePayloadExists');
-const fileExtLimiter = require('../../middleware/fileExtLimiter');
-const fileSizeLimiter = require('../../middleware/fileSizeLimiter');
+const fileUpload = require("express-fileupload");
+const filesPayloadExists = require("../../middleware/filePayloadExists");
+const fileExtLimiter = require("../../middleware/fileExtLimiter");
+const fileSizeLimiter = require("../../middleware/fileSizeLimiter");
 
-class ImageRouter extends BaseRouter {
-    constructor() {
-        super(imageController)
-    };
+const router = new express.Router();
+router.post(
+  "/operators/:operatorID",
+  verify,
+  verifyOperator,
+  count,
+  fileUpload({ createParentPath: true }),
+  filesPayloadExists,
+  fileExtLimiter([".png", ".jpg", ".jpeg"]),
+  fileSizeLimiter,
+  imageController.create
+);
+router.post(
+  "/accounts/:accountID",
+  verify,
+  count,
+  fileUpload({ createParentPath: true }),
+  filesPayloadExists,
+  fileExtLimiter([".png", ".jpg", ".jpeg"]),
+  fileSizeLimiter,
+  imageController.createAccountProfileImage
+);
+router.get("/:id", verify, count, imageController.getOne);
+router.get("/operator/:operatorID", verify, count, imageController.getAllImagesIDsOfOperator);
+router.delete("/:id", verify, verifyAdmin, count, imageController.delete);
 
-    initializeRoutes() {
-
-        this.router.post('/',verify, count,
-        fileUpload({ createParentPath: true }),
-        filesPayloadExists,
-        fileExtLimiter(['.png','.jpg','.jpeg']),
-        fileSizeLimiter,
-        this.controller.create);
-        
-        this.router.post('/accounts/:accountID', verify, count,
-        fileUpload({ createParentPath: true }),
-        filesPayloadExists,
-        fileExtLimiter(['.png','.jpg','.jpeg']),
-        fileSizeLimiter, 
-        this.controller.createAccountProfileImage)
-
-        this.router.get('/:id', verify, count, this.controller.getOne);
-        this.router.delete('/:id', verify, verifyAdmin, count, this.controller.delete);
-    };
-
-    getRouter() {
-        return this.router;
-    }
-};
-
-module.exports = ImageRouter;
+module.exports = router;

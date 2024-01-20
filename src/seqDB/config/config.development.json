@@ -5,6 +5,7 @@
     "host": "localhost",
     "dialect": "mysql",
     "logging": false,
+    "alter": false,
     "define": {
       "freezeTableName": true,
       "charset": "utf8mb4",

@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
           model: sequelize.define(
             "Application",
             {
+              id: {
+                type: Sequelize.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+              },
               offered_payment: {
                 type: Sequelize.FLOAT,
                 allowNull: false,
@@ -21,13 +26,21 @@ module.exports = (sequelize, DataTypes) => {
                 type: Sequelize.BOOLEAN,
                 allowNull: true,
               },
+              rejectType: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+              },
+              customComment: {
+                type: Sequelize.STRING,
+                allowNull: true,
+              },
             },
             {
               createdAt: true,
               updatedAt: false,
             }
           ),
-          unique: false, // Jeśli tabela asocjacyjna ma mieć indeksy dla kolumn, ustaw na true
+          unique: false,
         },
         as: "ApplicationOperator",
       });
