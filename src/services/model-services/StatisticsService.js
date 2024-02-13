@@ -6,10 +6,10 @@ class StatisticsService extends BaseService {
         super(Statistics)
     }
 
-    async incNumberOfRequests(apiKey) {
-        const stats = await super.findOne({ where: {api_key: apiKey}});
-        const actual = stats.numberOfRequests;
-        await super.update({numberOfRequests: actual+1},{ where: {api_key: apiKey}})
+    async incNumberOfRequests(accID) {
+        const stats = await super.findOne({ where: {AccountId: accID}});
+        stats.numberOfRequests += 1;
+        await stats.save();
     }
 
     // Override or new methods here

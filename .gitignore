@@ -19,7 +19,6 @@ cert/cert.pem
 
 # Ignore all files in media/videos and media/images
 media/videos/*
-media/images/*
 
 # Except for .folderkeeper
 !media/videos/.folderkeeper

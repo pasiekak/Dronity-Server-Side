@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Statistics.belongsTo(models.Account, { targetKey: 'api_key', foreignKey: 'api_key' });
+      Statistics.belongsTo(models.Account, { targetKey: 'id' });
 
     }
   }

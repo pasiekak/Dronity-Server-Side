@@ -1,92 +1,32 @@
 [
   {
     "id": 1,
-    "firstName": "Alfreda",
-    "lastName": "Mueller",
-    "phone": "(944) 517-3980"
+    "firstName": "Klara",
+    "lastName": "Makowska",
+    "phone": "+48221529520"
   },
   {
     "id": 2,
-    "firstName": "Davenport",
-    "lastName": "Dunlap",
-    "phone": "(950) 528-2880"
+    "firstName": "Zygfryd",
+    "lastName": "Zalewski",
+    "phone": "+48617302022"
   },
   {
     "id": 3,
-    "firstName": "Bartlett",
-    "lastName": "Ortiz",
-    "phone": "(824) 598-2339"
+    "firstName": "Rozalia",
+    "lastName": "Nowak",
+    "phone": "+48214706160"
   },
   {
     "id": 4,
-    "firstName": "Alvarez",
-    "lastName": "Dominguez",
-    "phone": "(959) 443-2626"
+    "firstName": "Heronim",
+    "lastName": "Dominik",
+    "phone": "+48411551055"
   },
   {
     "id": 5,
-    "firstName": "Ollie",
-    "lastName": "Cook",
-    "phone": "(883) 600-2458"
-  },
-  {
-    "id": 6,
-    "firstName": "Nichols",
-    "lastName": "Campbell",
-    "phone": "(915) 433-3993"
-  },
-  {
-    "id": 7,
-    "firstName": "Ferguson",
-    "lastName": "Andrews",
-    "phone": "(918) 442-2600"
-  },
-  {
-    "id": 8,
-    "firstName": "Conley",
-    "lastName": "Boyd",
-    "phone": "(953) 542-2095"
-  },
-  {
-    "id": 9,
-    "firstName": "Gillespie",
-    "lastName": "Kaufman",
-    "phone": "(811) 584-2727"
-  },
-  {
-    "id": 10,
-    "firstName": "Kathy",
-    "lastName": "Fuller",
-    "phone": "(872) 547-3061"
-  },
-  {
-    "id": 11,
-    "firstName": "Monique",
-    "lastName": "Trujillo",
-    "phone": "(878) 414-2427"
-  },
-  {
-    "id": 12,
-    "firstName": "Claire",
-    "lastName": "Wilkerson",
-    "phone": "(914) 460-2983"
-  },
-  {
-    "id": 13,
-    "firstName": "Allie",
-    "lastName": "Boyle",
-    "phone": "(960) 482-2890"
-  },
-  {
-    "id": 14,
-    "firstName": "Carla",
-    "lastName": "Ellison",
-    "phone": "(817) 456-2304"
-  },
-  {
-    "id": 15,
-    "firstName": "Daugherty",
-    "lastName": "Washington",
-    "phone": "(981) 522-2854"
+    "firstName": "Alicja",
+    "lastName": "Sadowska",
+    "phone": "+48782778715"
   }
 ]

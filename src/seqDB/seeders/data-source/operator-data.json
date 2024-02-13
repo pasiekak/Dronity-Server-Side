@@ -1,62 +1,22 @@
 [
   {
     "id": 1,
-    "firstName": "Ferguson",
-    "lastName": "Hansen",
-    "phone": "(852) 463-3904",
-    "license": "Fugiat tempor commodo aute magna fugiat officia sit fugiat dolore qui.",
-    "city": "Brambleton",
+    "firstName": "Herbert",
+    "lastName": "Kot",
+    "phone": "+48343320103",
+    "license": "POL-RP-123123123123",
+    "city": "Kalisz",
     "operational_range": 663,
-    "description": "Et cillum pariatur elit esse veniam deserunt velit labore nisi reprehenderit. Cupidatat ea sunt est qui officia laboris amet qui mollit ipsum Lorem est. Magna Lorem exercitation aliqua in nostrud enim veniam cupidatat sunt proident. Irure in ea irure cupidatat qui enim ad aute. Consectetur cupidatat sunt reprehenderit cillum mollit consequat do. Veniam pariatur consequat irure irure ea non ex ipsum nisi ex excepteur. Adipisicing eiusmod duis irure eu. Cupidatat et adipisicing adipisicing laboris. Nisi incididunt eu aute ut incididunt dolor deserunt irure sunt. Reprehenderit ex excepteur nostrud laboris mollit fugiat esse."
+    "description": "Witaj! Jestem Herbert Kot, podróżnik nieba i magik obiektywu. Z Kalisza do najwyższych szczytów kreatywności, przenoszę się z dronem w ręku, gotów na wyjątkową przygodę fotograficzną. Moja pasja do sztuki powietrznej sprawia, że nie tylko rejestruję chwile, ale także kreuję niepowtarzalne opowieści w każdym ujęciu. Każda fotografia to dla mnie podróż w czasie, gdzie zatrzymuję ulotne momenty, by przypominały o emocjach z danego dnia. Moje umiejętności to połączenie techniki, wizji artystycznej i miłości do detalu. Przeżyj ze mną lot przez niebo wyobraźni, gdzie obrazy nabierają życia, a wspomnienia stają się wieczne. Herbert Kot - twój pilot w podróży po krainie nieograniczonych możliwości!"
   },
   {
     "id": 2,
-    "firstName": "Livingston",
-    "lastName": "Fischer",
-    "phone": "(858) 505-2462",
-    "license": "Irure sint adipisicing consequat eu excepteur dolor amet dolor occaecat mollit proident veniam.",
-    "city": "Rockhill",
+    "firstName": "Dorota",
+    "lastName": "Wróblewska",
+    "phone": "+48246740966",
+    "license": "POL-RP-234234234234",
+    "city": "Zamość",
     "operational_range": 859,
-    "description": "Sunt dolor adipisicing irure consequat laboris sunt ea ullamco cupidatat ad labore officia quis laborum. Minim nostrud esse deserunt do deserunt duis culpa reprehenderit sit do aute dolor. Magna consequat elit et non nisi ipsum pariatur. Elit sint quis culpa incididunt et laborum tempor sint ea magna ipsum. Ut ullamco incididunt esse veniam ex aute proident velit dolor tempor. Lorem id pariatur reprehenderit ex ad est quis esse dolore est consequat. Ut veniam deserunt eiusmod anim ad eiusmod minim mollit. Irure id nisi in do minim cillum et cillum quis culpa nisi ea aute. Incididunt minim commodo magna culpa sunt. Non anim cillum officia ipsum velit officia cupidatat voluptate."
-  },
-  {
-    "id": 3,
-    "firstName": "Edwina",
-    "lastName": "Crosby",
-    "phone": "(977) 554-3000",
-    "license": "Commodo pariatur elit occaecat ad proident.",
-    "city": "Devon",
-    "operational_range": 1835,
-    "description": "Deserunt reprehenderit minim esse sint Lorem esse adipisicing aliqua ut eiusmod. Aute deserunt ut in labore officia incididunt laboris. Consequat amet enim do culpa duis excepteur. Dolore do in exercitation voluptate incididunt nisi occaecat aliquip excepteur consequat et ea. Irure fugiat ut nisi aliquip anim nulla velit eu ad minim commodo dolor pariatur elit. Velit commodo velit amet non laboris do exercitation ipsum minim aliquip commodo. Ea excepteur ex qui commodo. Proident laboris ullamco in id commodo ullamco sint nostrud ut nostrud Lorem Lorem. Irure ea culpa voluptate officia laborum sit sint. Reprehenderit velit exercitation quis proident aute eiusmod anim incididunt esse."
-  },
-  {
-    "id": 4,
-    "firstName": "Simone",
-    "lastName": "Sanford",
-    "phone": "(831) 508-2410",
-    "license": "In excepteur mollit in et veniam.",
-    "city": "Grazierville",
-    "operational_range": 1452,
-    "description": "Consequat veniam consectetur ad ullamco officia. Commodo nostrud minim labore pariatur esse culpa culpa. Esse commodo laborum nulla quis qui aliquip Lorem pariatur tempor ex nulla laborum in dolor. Dolor do mollit veniam occaecat veniam incididunt adipisicing deserunt labore. Duis nostrud ullamco culpa et laborum sit officia fugiat nisi. Aliqua incididunt dolore anim ipsum culpa tempor irure incididunt voluptate id. Adipisicing quis reprehenderit aute ut exercitation consequat ex ullamco enim laboris non et veniam ex. Ullamco ea mollit quis id ullamco nulla. Minim laborum dolore deserunt esse fugiat sint Lorem exercitation reprehenderit sint cupidatat in. Reprehenderit irure ipsum enim velit quis esse sit exercitation ut."
-  },
-  {
-    "id": 5,
-    "firstName": "Davis",
-    "lastName": "Zimmerman",
-    "phone": "(901) 411-3702",
-    "license": "Id Lorem occaecat sit voluptate tempor ad ullamco veniam ullamco qui nulla in culpa anim.",
-    "city": "Marbury",
-    "operational_range": 1324,
-    "description": "Commodo commodo mollit pariatur ex aute consequat esse occaecat voluptate aliquip ea sit. Excepteur dolor amet in commodo occaecat magna sint. Sit anim ut enim sunt eiusmod incididunt. Ad dolor aliqua sunt elit eiusmod et anim exercitation fugiat veniam irure officia aliquip incididunt. Qui exercitation veniam ullamco dolore. Excepteur ipsum dolore voluptate eiusmod. Sunt eu quis anim nulla ullamco pariatur laboris. Occaecat et laborum consequat est aliqua deserunt fugiat laborum eu ullamco. Aliquip commodo qui tempor anim duis tempor ipsum. Tempor ad cillum esse ipsum mollit amet labore esse pariatur."
-  },
-  {
-    "id": 6,
-    "firstName": "Simone",
-    "lastName": "Inzaghi",
-    "phone": "(901) 433-2312",
-    "license": "Id Lorem occaecat sit voluptate tempor ad ullamco veniam ullamco qui nulla in culpa anim.",
-    "city": "Barcelona",
-    "operational_range": 1000,
-    "description": "Commodo commodo mollit pariatur ex aute consequat esse occaecat voluptate aliquip ea sit. Excepteur dolor amet in commodo occaecat magna sint. Sit anim ut enim sunt eiusmod incididunt. Ad dolor aliqua sunt elit eiusmod et anim exercitation fugiat veniam irure officia aliquip incididunt. Qui exercitation veniam ullamco dolore. Excepteur ipsum dolore voluptate eiusmod. Sunt eu quis anim nulla ullamco pariatur laboris. Occaecat et laborum consequat est aliqua deserunt fugiat laborum eu ullamco. Aliquip commodo qui tempor anim duis tempor ipsum. Tempor ad cillum esse ipsum mollit amet labore esse pariatur."
+    "description": "Witaj w świecie, gdzie niebo staje się płótnem, a obiektyw drona w magiczną różdżkę. Jestem Dorota Wróblewska, twoja lotnicza przewodniczka po Zamościu i nie tylko. Moje serce bije w rytmie fotografii lotniczej, gdzie każdy kadr to niepowtarzalny obraz, a każde zdjęcie to opowieść pełna emocji. Przez obiektyw mojego drona uchwytuję chwile, które stają się wiecznymi wspomnieniami. Moja specjalizacja to sztuka uchwycania nieoczywistych perspektyw, gdzie codzienność staje się arcydziełem. Jeśli marzysz o zdjęciach, które przekraczają granice tradycji, dołącz do mnie w podróży przez przestworza wyobraźni. Dorota Wróblewska - twój pilot w niezwykłej podróży fotograficznej."
   }
 ]

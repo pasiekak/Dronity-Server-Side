@@ -14,9 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Account.belongsTo(models.Role, { foreignKey: { allowNull: false, defaultValue: 3 }});
       Account.belongsTo(models.Operator, { foreignKey: { unique: true }});
       Account.belongsTo(models.Client, { foreignKey: { unique: true }});
-      
-      Account.hasOne(models.Statistics, { sourceKey: 'api_key', foreignKey: 'api_key' });
-
+      Account.hasOne(models.Statistics, { sourceKey: 'id' });
       Account.hasMany(models.Image);
     };
   }

@@ -1,7 +1,4 @@
 const REJECTMSGS = {
-  0: {
-    message: "Autor zlecenia nie wybrał powodu odrzucenia twojego zgłoszenia.",
-  },
   1: {
     message: "Kwota zaproponowana przez operatora była za wysoka.",
   },
@@ -16,6 +13,9 @@ const REJECTMSGS = {
   },
   5: {
     message: "Inne.",
+  },
+  6: {
+    message: "Klient wybrał innego operatora do tego zlecenia.",
   },
 };
 

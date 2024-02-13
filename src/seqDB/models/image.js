@@ -14,17 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       Image.belongsTo(models.Account)
     }
 
-    // Dodajemy własną metodę walidacji przed zapisem
     async validateProfileFlag() {
       if (this.profile) {
-        // Sprawdź, czy już istnieje inne zdjęcie z profile === true dla tego AccountID
         const existingProfileImage = await Image.findOne({
           where: {
             AccountId: this.AccountId,
             profile: true,
           },
         });
-
         if (existingProfileImage && existingProfileImage.id !== this.id) {
           throw new Error('There can be only one profile image');
         }

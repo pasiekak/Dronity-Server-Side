@@ -4,17 +4,9 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Client extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
-      Client.hasOne(models.Address, { foreignKey: { allowNull: false, unique: true }});
       Client.hasOne(models.Account, { foreignKey: { unique: true }});
       Client.hasMany(models.Commission, { as: 'AuthorCommissions', foreignKey: { name: 'author', allowNull: false }})
-
     }
   }
   Client.init({

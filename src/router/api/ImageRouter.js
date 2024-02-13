@@ -32,6 +32,6 @@ router.post(
 );
 router.get("/:id", verify, count, imageController.getOne);
 router.get("/operator/:operatorID", verify, count, imageController.getAllImagesIDsOfOperator);
-router.delete("/:id", verify, verifyAdmin, count, imageController.delete);
+router.delete("/:id", verify, verifyOperator, count, imageController.delete);
 
 module.exports = router;

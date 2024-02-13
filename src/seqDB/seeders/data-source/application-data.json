@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "offered_payment": 1850.0,
+    "accepted": null,
+    "rejectType": null,
+    "customComment": null,
+    "createdAt": "2024-01-23T10:30:00",
+    "OperatorId": 1,
+    "CommissionId": 1
+  },
+  {
+    "id": 2,
+    "offered_payment": 2000.0,
+    "accepted": null,
+    "rejectType": null,
+    "customComment": null,
+    "createdAt": "2024-01-23T10:30:00",
+    "OperatorId": 2,
+    "CommissionId": 1
+  }
+]

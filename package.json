@@ -4,6 +4,7 @@
   "description": "Server side for drone website",
   "main": "server.js",
   "scripts": {
+    "start": "node index.js",
     "test": "jest",
     "dev": "nodemon index.js"
   },

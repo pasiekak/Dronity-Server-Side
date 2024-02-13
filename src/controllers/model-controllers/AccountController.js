@@ -141,8 +141,7 @@ class AccountController extends BaseController {
         from: process.env.MAIL_USER,
         to: payload.email,
         subject: "Aktywacja konta",
-        html: `<a href="http://localhost:3000/auth/activation?token=${token}">Link aktywacyjny</a>
-                        <a href="https://docelowastrona.pl">TODO</a>`,
+        html: `<a href="http://localhost:3000/auth/activation?token=${token}">Link aktywacyjny</a>`,
       };
 
       transporter.sendMail(mailOptions, (err, info) => {
@@ -151,7 +150,7 @@ class AccountController extends BaseController {
         } else {
           res.status(200).send({
             success: true,
-            message: "Wysłaliśmy maila na twój email.",
+            message: "Wysłaliśmy maila na twój adres email.",
           });
         }
       });
