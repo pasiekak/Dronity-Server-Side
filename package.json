@@ -23,7 +23,7 @@
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
     "mysql2": "^3.9.4",
-    "nodemailer": "^6.9.7",
+    "nodemailer": "^6.9.9",
     "sequelize": "^6.32.0",
     "sqlite3": "^5.1.6",
     "swagger-ui-express": "^4.6.3",
